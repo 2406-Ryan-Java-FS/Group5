@@ -18,9 +18,16 @@
     - As a user, I can set my daily calorie to monitor my progress towards my health objectives.
     - As a user, I can view my daily calorie.
     - *As a user, I can view my daily calorie recommendation.*(??)
-        - How to Calculate Calories
-            - For women, BMR = 655.1 + (9.563 x weight in kg) + (1.850 x height in cm) - (4.676 x age in years)
-            - For men, BMR = 66.47 + (13.75 x weight in kg) + (5.003 x height in cm) - (6.755 x age in years)
+        - How to Calculate Calories: Multiply your BMR by a number based on how active you are.
+            - Calculating BMR
+                - For women, BMR = 655.1 + (9.563 x weight in kg) + (1.850 x height in cm) - (4.676 x age in years)
+                - For men, BMR = 66.47 + (13.75 x weight in kg) + (5.003 x height in cm) - (6.755 x age in years)
+            - Activity level
+                - Lightly active: Multiply by 1.375 if you exercise 1–3 days a week
+                - Moderately active: Multiply by 1.55 if you exercise 3–5 days a week
+                - Very active: Multiply by 1.725 if you exercise 6–7 days a week
+                - Extra active: Multiply by 1.9 if you exercise very hard and also have a physical job or train twice a day
+            
 
 - Log claories        
     - As a user, I can monitor my calorie intakes such as how much I have take and how much is left for a day.
