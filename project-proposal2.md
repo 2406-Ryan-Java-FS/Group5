@@ -17,7 +17,7 @@
 - Calorie Goal
     - As a user, I can set my daily calorie to monitor my progress towards my health objectives.
     - As a user, I can view my daily calorie.
-    - As a user, I can view my daily calorie recommendation.
+    - *As a user, I can view my daily calorie recommendation.*(??)
         - How to Calculate Calories
             - For women, BMR = 655.1 + (9.563 x weight in kg) + (1.850 x height in cm) - (4.676 x age in years)
             - For men, BMR = 66.47 + (13.75 x weight in kg) + (5.003 x height in cm) - (6.755 x age in years)
@@ -39,7 +39,7 @@
 - As a user, I can view an average of the calorie intake.
 - As a user, I can add a food journal.
 - As a user, I can share my healthy receipe.
-- Do we need more roles for admins?
+- *Do we need more roles for admins?*
 
 ### Models
 
@@ -47,5 +47,5 @@
 - role(User and Admin)
 - calorietrack(a table for saving user's calorie log)
 - Profile(user's height, weight, activity levels, calorie goal, etc...)
-- Food(public data api? or manual database table?)
+- *Food(public data api? or manual database table?)*
 
