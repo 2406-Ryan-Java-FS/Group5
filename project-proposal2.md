@@ -1,4 +1,4 @@
-# Project Proposal - Group 5
+# Project1 Proposal - Group 5
 
 ## Calorie Tracker Application
 
