@@ -1,0 +1,23 @@
+Calorie Tracker App
+----------------------------
+An app to track your calorie intake to meet a specific goal.
+----------------------------
+
+User/Admin Stories:
+
+- As a user, I can create an account to store my food items and calorie data.
+- As a user, I can log into my account so that I can access my stored food items and calorie data.
+- As a user, I can set a daily calorie intake goal to monitor my progress towards my health objectives.
+- As a user, I can add a food item that I ate from a main database to log my calorie intake.
+- As a user, I can create a food item from scratch if it is not found in the main database so that I can log my calorie intake accurately.
+- As a user, I can view my food items and total calorie count for a specific day/week/all-time to monitor my daily/weekly/all-time intake.
+- As a user, I can view all food items in the main database (visible to all users).
+- As a user, I can update/delete a food item I logged if I find that the calorie count is different from the input so that my records remain accurate.
+- As a user, I can edit my profile information (such as weight, height, and activity level) so that my calorie goals are accurate.
+- As an admin, I can approve food items created by users before they are added to the main database to maintain high accuracy and quality in main database.
+
+Ideas we may include:
+- As a user, I can receive notifications if I am close to exceeding my daily calorie goal.
+
+--------------------------
+
