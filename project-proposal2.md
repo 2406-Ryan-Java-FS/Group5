@@ -29,7 +29,7 @@
                 - Extra active: Multiply by 1.9 if you exercise very hard and also have a physical job or train twice a day
             
 
-- Log claories        
+- Log calories        
     - As a user, I can monitor my calorie intakes such as how much I have take and how much is left for a day.
     - AS a user, I can monitor total calorie count for a daily, weekly and all-time intake.
     - As a user, I can add my calorie intake.
@@ -55,4 +55,5 @@
 - calorietrack(a table for saving user's calorie log)
 - Profile(user's height, weight, activity levels, calorie goal, etc...)
 - *Food(public data api? or manual database table?)*
+- foodRequest(for admin)
 
