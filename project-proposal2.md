@@ -1,4 +1,4 @@
-# Project2 Proposal - Group 5
+# Project Proposal - Group 5
 
 ## Calorie Tracker Application
 
@@ -9,7 +9,7 @@
 ### User stories
 
 - Login
-    - As a user, I can create my account with information for my profile(such as weight, height, and activity level)
+    - As a user, I can create my account with information for my profile(such as weight, height, and activity level) and login to my account.
     - As a user, I can log into my account and view my profile.
     - As a user, I can update or delete my account and profile.
     - As an admin, I can login to my account. (creating an account for admin needed?)
