@@ -8,11 +8,11 @@
 
 ### User stories
 
-- Login
+- Login/ myprofile
     - As a user, I can create my account with information for my profile(such as weight, height, and activity level) and login to my account.
-    - As a user, I can log into my account and view my profile.
+    - As a user, I can view my profile.
     - As a user, I can update or delete my account and profile.
-    - As an admin, I can login to my account. (creating an account for admin needed?)
+    - As an admin, I can view and manage users' information.
 
 - Calorie Goal
     - As a user, I can set my daily calorie to monitor my progress towards my health objectives.
