@@ -16,7 +16,7 @@ public class Profile {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "p_id", updatable = false)
-        private int id;
+        private int p_id;
 
         @Column(name = "gender", nullable = false)
         private boolean gender;
