@@ -12,11 +12,10 @@
     - As a user, I can create my account with information for my profile(such as weight, height, and activity level) and login to my account.
     - As a user, I can view my profile.
     - As a user, I can update or delete my account and profile.
-    - As an admin, I can view and manage users' information.
 
 - Calorie Goal
     - As a user, I can set my daily calorie to monitor my progress towards my health objectives.
-    - As a user, I can view my daily calorie.
+    - As a user, I can view my daily calorie goal.
     - *As a user, I can view my daily calorie recommendation.*(??)
         - How to Calculate Calories: Multiply your BMR by a number based on how active you are.
             - Calculating BMR
@@ -30,15 +29,12 @@
             
 
 - Log calories        
-    - As a user, I can monitor my calorie intakes such as how much I have take and how much is left for a day.
-    - AS a user, I can monitor total calorie count for a daily, weekly and all-time intake.
+    - As a user, I can monitor my calorie intakes such as how much I have taken and how much is left for a day.
+    - As a user, I can monitor total calorie count for a daily, weekly and all-time intake.(monthly instead of all-time?)(average?)
     - As a user, I can add my calorie intake.
     - As a user, I can manipulate(update/delete) my calorie intake tracker if I find that the calorie count is different from the input so that my records remain accurate.
     - As a user, I can manually create a food information and add it to my tracker if it is not found in the database so that I can log my calorie intake accurately.
 
-- Request for adding new food
-    - As a user, I can request to admin for adding new food information.
-    - As an admin, I can confirm a user's request and add it to a database.
 
 ### Ideas we may include:
 
