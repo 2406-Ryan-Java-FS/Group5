@@ -19,8 +19,9 @@ public class Food {
     private int id;
 
     @Column(name = "food_name", unique = true, nullable = false)
-    private boolean foodName;
+    private String foodName;
 
     @Column(name = "calorie", nullable = false)
     private int calorie;
+
 }
