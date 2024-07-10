@@ -18,7 +18,7 @@ public class Food {
     @Column(name = "f_id", updatable = false)
     private int id;
 
-    @Column(name = "food_name", nullable = false)
+    @Column(name = "food_name", unique = true, nullable = false)
     private boolean foodName;
 
     @Column(name = "calorie", nullable = false)
