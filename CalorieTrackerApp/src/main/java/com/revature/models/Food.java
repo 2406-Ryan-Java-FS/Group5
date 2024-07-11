@@ -24,4 +24,5 @@ public class Food {
     @Column(name = "calorie", nullable = false)
     private int calorie;
 
+
 }
