@@ -16,6 +16,7 @@ public class ProfileDTO {
     private double height;
     private double weight;
     private int activity;
-    private int calorie_goal;
-    private int u_id;
+    private int calorieGoal;
+    // foreign key
+    private int uId;
 }

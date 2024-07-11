@@ -4,6 +4,20 @@ import com.revature.models.CalorieTrack;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
 @Repository
 public interface CalorieTrackRepo extends JpaRepository<CalorieTrack, Integer> {
+    Optional<CalorieTrack> findById(int cId);
+    Optional<CalorieTrack> findByUserId(int uId);
+
+    Optional<CalorieTrack> findByFoodName(String foodName);
+
+    List<CalorieTrack> findByUserIdAndDateTime(int uId, LocalDate logDate);
+
+    List<CalorieTrack> findAllByDateTimeBetween(
+            LocalDate logDateStart,
+            LocalDate logDateEnd);
 }

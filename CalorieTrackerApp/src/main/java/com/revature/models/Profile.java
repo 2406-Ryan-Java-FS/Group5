@@ -16,7 +16,7 @@ public class Profile {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "p_id", updatable = false)
-        private int p_id;
+        private int pId;
 
         @Column(name = "gender", nullable = false)
         private boolean gender;
@@ -31,7 +31,7 @@ public class Profile {
         private int activity;
 
         @Column(name = "calorie_goal", nullable = false)
-        private int calorie_goal;
+        private int calorieGoal;
 
         @Column
         @OneToOne(fetch = FetchType.LAZY)
