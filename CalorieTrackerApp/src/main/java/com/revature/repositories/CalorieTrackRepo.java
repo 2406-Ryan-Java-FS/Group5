@@ -19,4 +19,5 @@ public interface CalorieTrackRepo extends JpaRepository<CalorieTrack, Integer> {
             LocalDate logDateStart,
             LocalDate logDateEnd);
 
+
 }
