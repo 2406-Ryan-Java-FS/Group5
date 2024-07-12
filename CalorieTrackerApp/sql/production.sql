@@ -26,6 +26,16 @@ create table calorie_track(
 	f_id int references foods(f_id) on delete set null,
 	u_id int references users(u_id) on delete set null,
 	serving double precision not null,
-	datetime timestamp not null default now()
+	log_date date not null default DEFAULT CURRENT_DATE
 );
+
+
+
+
+drop table calorie_track;
+drop table profiles;
+drop table foods;
+drop table users;
+drop table custom_foods;
+
 
