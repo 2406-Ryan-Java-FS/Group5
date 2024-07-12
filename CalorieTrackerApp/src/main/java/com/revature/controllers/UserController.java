@@ -16,10 +16,12 @@ public class UserController {
 
     @PostMapping(path="/register")
     public String saveUser(@RequestBody UserDTO userDTO) {
-        String u_id = userService.registerUser(userDTO);
-        return u_id;
-
+//        String u_id = userService.registerUser(userDTO);
+//        return u_id;
+        return "";
     }
+
+
 
 
 
