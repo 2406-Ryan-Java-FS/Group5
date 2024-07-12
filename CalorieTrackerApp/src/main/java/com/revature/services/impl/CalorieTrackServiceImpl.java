@@ -1,7 +1,13 @@
 package com.revature.services.impl;
 
 import com.revature.dto.CalorieTrackDTO;
+import com.revature.exceptions.CalorieTrackExceptions.CalorieTrackNotFoundException;
+import com.revature.models.CalorieTrack;
+import com.revature.repositories.CalorieTrackRepo;
+import com.revature.repositories.FoodRepo;
+import com.revature.repositories.UserRepo;
 import com.revature.services.CalorieTrackService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -9,9 +15,19 @@ import java.util.List;
 
 @Service
 public class CalorieTrackServiceImpl implements CalorieTrackService {
+
+    @Autowired
+    CalorieTrackRepo calorieTrackRepo;
+    @Autowired
+    UserRepo userRepo;
+    @Autowired
+    FoodRepo foodReo;
+
     @Override
     public CalorieTrackDTO getCalories(int cId) {
-        return null;
+        CalorieTrack calorieTrack = calorieTrackRepo.findById(cId).orElseThrow(() -> new CalorieTrackNotFoundException("Calorie Track not found"));
+
+
     }
 
     @Override
@@ -42,5 +58,22 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
     @Override
     public void deleteCalorieTrack(int cId) {
 
+    }
+
+    private CalorieTrack convertCalorieTrackDTOTOCalorieTrack(CalorieTrackDTO calorieTrackDTO){
+        return CalorieTrack.builder()
+                .serving(calorieTrackDTO.getServing())
+                .logDate(calorieTrackDTO.getLogDate())
+                .build();
+    }
+
+    private CalorieTrackDTO convertCalorieTrackToCalorieTrackDTO(CalorieTrack calorieTrack){
+        return CalorieTrackDTO.builder()
+                .cId(calorieTrack.getCId())
+                .serving(calorieTrack.getServing())
+                .logDate(calorieTrack.getLogDate())
+                .uId(calorieTrack.getUser().getUId())
+                .fId(calorieTrack.getFood().getFId())
+                .build();
     }
 }

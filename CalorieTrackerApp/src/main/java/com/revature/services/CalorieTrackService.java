@@ -12,11 +12,11 @@ public interface CalorieTrackService {
 
     public List<CalorieTrackDTO> getCaloriesByUserAndDateBetween(int uId, LocalDate logDateStart, LocalDate logDateEnd);
 
+    public List<CalorieTrackDTO> getCaloriesByUserAndDate(int uId, LocalDate logDate);
+
     public CalorieTrackDTO createCalorieTrack(CalorieTrackDTO calorieTrackDTO);
 
     public CalorieTrackDTO updateCalorieTrack(int cId, CalorieTrackDTO calorieTrackDTO);
-
-    List<CalorieTrackDTO> getCaloriesByUserAndDate(int uId, LocalDate logDate);
 
     public void  deleteCalorieTrack(int cId);
 
