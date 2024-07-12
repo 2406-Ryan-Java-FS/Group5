@@ -4,9 +4,9 @@ import com.revature.dto.ProfileDTO;
 
 public interface ProfileService {
     public ProfileDTO createProfile(ProfileDTO profileDTO);
-    public ProfileDTO getProfile(ProfileDTO profileDTO);
-    public ProfileDTO updateProfile(ProfileDTO profileDTO);
-    public ProfileDTO deleteProfile(ProfileDTO profileDTO);
+    public ProfileDTO getProfile(int pId);
+    public ProfileDTO updateProfile(int pId, ProfileDTO profileDTO);
+    public ProfileDTO deleteProfile(int pId);
 
 
 }

@@ -10,19 +10,22 @@ public interface CalorieTrackService {
 
     public List<CalorieTrackDTO> getCaloriesByUser(int uId);
 
-    public List<CalorieTrackDTO> getCaloriesByDate(LocalDate logDate);
-    public List<CalorieTrackDTO> getCaloriesByDateBetween(LocalDate logDateStart, LocalDate logDateEnd);
-
-    public CalorieTrackDTO getCaloriesByFoodName(String foodName);
+    public List<CalorieTrackDTO> getCaloriesByUserAndDateBetween(int uId, LocalDate logDateStart, LocalDate logDateEnd);
 
     public CalorieTrackDTO createCalorieTrack(CalorieTrackDTO calorieTrackDTO);
 
     public CalorieTrackDTO updateCalorieTrack(int cId, CalorieTrackDTO calorieTrackDTO);
 
-    public CalorieTrackDTO deleteCalorieTrack(int cId);
+    List<CalorieTrackDTO> getCaloriesByUserAndDate(int uId, LocalDate logDate);
+
+    public void  deleteCalorieTrack(int cId);
+
+
 
 
 //    PUT https://localhost:8080:api/caloriestrack/{cId}
+
+
 
 
 

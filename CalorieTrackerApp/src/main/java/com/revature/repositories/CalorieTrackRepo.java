@@ -11,13 +11,12 @@ import java.util.Optional;
 @Repository
 public interface CalorieTrackRepo extends JpaRepository<CalorieTrack, Integer> {
     Optional<CalorieTrack> findById(int cId);
-    Optional<CalorieTrack> findByUserId(int uId);
+    List<CalorieTrack> findAllByUserId(int uId);
 
-    Optional<CalorieTrack> findByFoodName(String foodName);
-
-    List<CalorieTrack> findByUserIdAndDateTime(int uId, LocalDate logDate);
+     List<CalorieTrack> findAllByUserIdAndLogDate(int uId, LocalDate logDate);
 
     List<CalorieTrack> findAllByDateTimeBetween(
             LocalDate logDateStart,
             LocalDate logDateEnd);
+
 }

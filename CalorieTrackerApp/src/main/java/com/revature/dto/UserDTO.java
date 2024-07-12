@@ -13,7 +13,4 @@ public class UserDTO {
     private int uId;
     private String username;
     private String password;
-
-
-
 }
