@@ -4,7 +4,7 @@ import com.revature.dto.UserDTO;
 
 public interface UserService {
 
-    String registerUser(UserDTO userDTO);
+    public UserDTO registerUser(UserDTO userDTO);
 
     // Retrieves a UserEntity object by username and password using the UserRepository and returns a UserDTO.
 //    public UserDTO loginUser(UserDTO userDTO);
