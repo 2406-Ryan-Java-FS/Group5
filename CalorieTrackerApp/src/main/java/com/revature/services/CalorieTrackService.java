@@ -16,9 +16,9 @@ public interface CalorieTrackService {
 
     public Result<CalorieTrackDTO> createCalorieTrack(CalorieTrackDTO calorieTrackDTO);
 
-    public Result<CalorieTrackDTO> updateCalorieTrack(int cId, CalorieTrackDTO calorieTrackDTO);
+    public Result<CalorieTrackDTO> updateCalorieTrack(CalorieTrackDTO calorieTrackDTO);
 
-    public void  deleteCalorieTrack(int cId);
+    public boolean deleteCalorieTrack(int cId);
 
 
 

@@ -81,7 +81,7 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
     }
 
     @Override
-    public Result<CalorieTrackDTO> updateCalorieTrack(int cId, CalorieTrackDTO calorieTrackDTO) {
+    public Result<CalorieTrackDTO> updateCalorieTrack(CalorieTrackDTO calorieTrackDTO) {
         //When there are multiple errors in the process of validation, display list of error messages.
         Result<CalorieTrackDTO> result = validateCalorieTrack(calorieTrackDTO);
 
@@ -113,15 +113,18 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
 
 
     @Override
-    public void deleteCalorieTrack(int cId) {
+    public boolean deleteCalorieTrack(int cId) {
         //when Id doesn't exist in the database.
-        if(!calorieTrackRepo.existsById(cId)){
-            throw new CalorieTrackNotFoundException("CalorieTrack not found");
+        try{
+            CalorieTrackDTO calorieTrackDTO = getCalories(cId);
+            if(calorieTrackDTO.getCId() != cId){
+                calorieTrackRepo.deleteById(cId);
+                return true;
+            }
+        }catch (IllegalArgumentException e){
+            e.printStackTrace();
         }
-
-        //otherwise delete the calorieTrack
-        calorieTrackRepo.deleteById(cId);
-
+        return false;
     }
 
     //helper method for validating calorieTrackDTO
