@@ -4,13 +4,13 @@ import com.revature.dto.CalorieTrackDTO;
 import com.revature.exceptions.CalorieTrackExceptions.CalorieTrackNotFoundException;
 import com.revature.models.CalorieTrack;
 import com.revature.repositories.CalorieTrackRepo;
-import com.revature.repositories.FoodRepo;
-import com.revature.repositories.UserRepo;
 import com.revature.services.CalorieTrackService;
+import com.revature.services.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,46 +18,131 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
 
     @Autowired
     CalorieTrackRepo calorieTrackRepo;
-    @Autowired
-    UserRepo userRepo;
-    @Autowired
-    FoodRepo foodReo;
 
     @Override
     public CalorieTrackDTO getCalories(int cId) {
         CalorieTrack calorieTrack = calorieTrackRepo.findById(cId).orElseThrow(() -> new CalorieTrackNotFoundException("Calorie Track not found"));
-
-
+        return convertCalorieTrackToCalorieTrackDTO(calorieTrack);
     }
 
     @Override
     public List<CalorieTrackDTO> getCaloriesByUser(int uId) {
-        return null;
-    }
-
-    @Override
-    public List<CalorieTrackDTO> getCaloriesByUserAndDateBetween(int uId, LocalDate logDateStart, LocalDate logDateEnd) {
-        return null;
-    }
-
-    @Override
-    public CalorieTrackDTO createCalorieTrack(CalorieTrackDTO calorieTrackDTO) {
-        return null;
-    }
-
-    @Override
-    public CalorieTrackDTO updateCalorieTrack(int cId, CalorieTrackDTO calorieTrackDTO) {
-        return null;
+        List<CalorieTrack> calorieTrackList = calorieTrackRepo.findAllByUId(uId);
+        List<CalorieTrackDTO> calorieTrackDTOS = new ArrayList<>();
+        if(calorieTrackList != null && !calorieTrackList.isEmpty()){
+            for(CalorieTrack ct: calorieTrackList){
+                calorieTrackDTOS.add(convertCalorieTrackToCalorieTrackDTO(ct));
+            }
+        }
+        return calorieTrackDTOS;
     }
 
     @Override
     public List<CalorieTrackDTO> getCaloriesByUserAndDate(int uId, LocalDate logDate) {
-        return null;
+        List<CalorieTrack> calorieTrackList = calorieTrackRepo.findAllByUIdAndLogDate(uId, logDate);
+        List<CalorieTrackDTO> calorieTrackDTOS = new ArrayList<>();
+        if(calorieTrackList != null && !calorieTrackList.isEmpty()){
+            for(CalorieTrack ct: calorieTrackList){
+                calorieTrackDTOS.add(convertCalorieTrackToCalorieTrackDTO(ct));
+            }
+        }
+        return calorieTrackDTOS;
     }
 
     @Override
-    public void deleteCalorieTrack(int cId) {
+    public List<CalorieTrackDTO> getCaloriesByUserAndDateBetween(int uId, LocalDate logDateStart, LocalDate logDateEnd) {
+        List<CalorieTrack> calorieTrackList = calorieTrackRepo.findAllByUIdAndLogDateBetween(uId, logDateStart, logDateEnd);
+        List<CalorieTrackDTO> calorieTrackDTOS = new ArrayList<>();
+        if(calorieTrackList != null && !calorieTrackList.isEmpty()){
+            for(CalorieTrack ct: calorieTrackList){
+                calorieTrackDTOS.add(convertCalorieTrackToCalorieTrackDTO(ct));
+            }
+        }
+        return calorieTrackDTOS;
+    }
 
+
+    @Override
+    public Result<CalorieTrackDTO> createCalorieTrack(CalorieTrackDTO calorieTrackDTO) {
+       Result<CalorieTrackDTO> result = validateCalorieTrack(calorieTrackDTO);
+        if(!result.isSuccess()){
+            return result;
+        }
+        if(calorieTrackDTO.getCId() != 0){
+            result.addErrorMessage("cId must be set for `add` operation");
+            return result;
+        }
+        CalorieTrack calorieTrack = calorieTrackRepo.save(convertCalorieTrackDTOTOCalorieTrack(calorieTrackDTO));
+        CalorieTrackDTO returnedCalorieTrackDTO = convertCalorieTrackToCalorieTrackDTO(calorieTrack);
+        result.setPayload(returnedCalorieTrackDTO);
+        return result;
+    }
+
+    @Override
+    public Result<CalorieTrackDTO> updateCalorieTrack(int cId, CalorieTrackDTO calorieTrackDTO) {
+        //When there are multiple errors in the process of validation, display list of error messages.
+        Result<CalorieTrackDTO> result = validateCalorieTrack(calorieTrackDTO);
+
+        //.isSuccess() checks if there are error messages in the list.
+        if(!result.isSuccess()){
+            return result;
+        }
+
+        //If Id for update doesn't exist or eaulas or less than zero, the calorie track cannot be updated.
+        if(calorieTrackDTO.getCId() <= 0){
+            result.addErrorMessage("cId must be set for `update` operation");
+            return result;
+        }
+
+        // update calorieTrack
+        CalorieTrack calorieTrack = calorieTrackRepo.save(convertCalorieTrackDTOTOCalorieTrack(calorieTrackDTO));
+
+        //if it returns null meaning update operation went wrong, return result with error messages.
+        if(calorieTrack == null){
+            String msg = String.format("cId: %s, not found", calorieTrack.getCId());
+            result.addErrorMessage(msg);
+        }
+
+        //if update is successful, convert the entity into DTO and set Payload.
+        CalorieTrackDTO returnedCalorieTrackDTO = convertCalorieTrackToCalorieTrackDTO(calorieTrack);
+        result.setPayload(returnedCalorieTrackDTO);
+        return result;
+    }
+
+
+    @Override
+    public void deleteCalorieTrack(int cId) {
+        //when Id doesn't exist in the database.
+        if(!calorieTrackRepo.existsById(cId)){
+            throw new CalorieTrackNotFoundException("CalorieTrack not found");
+        }
+
+        //otherwise delete the calorieTrack
+        calorieTrackRepo.deleteById(cId);
+
+    }
+
+    //helper method for validating calorieTrackDTO
+    private Result<CalorieTrackDTO> validateCalorieTrack(CalorieTrackDTO calorieTrackDTO){
+        Result<CalorieTrackDTO> result = new Result<>();
+
+        if (calorieTrackDTO == null){
+            //throw new CalorieTrackNullException("calorieTrack cannot be null");
+            result.addErrorMessage("CalorieTrack cannot be null");
+            return result;
+        }
+        if(calorieTrackDTO.getUId() == 0){
+            // throw userNotFoundException("UserId is required")
+            result.addErrorMessage("UserId is required");
+        }
+        if(calorieTrackDTO.getFId() == 0){
+            //throw foodNotFound("Food cannot be null")
+            result.addErrorMessage("Food cannot be null");
+        }
+        if(calorieTrackDTO.getServing() <=0){
+            result.addErrorMessage("serving has to be equal to or greater than 0");
+        }
+        return result;
     }
 
     private CalorieTrack convertCalorieTrackDTOTOCalorieTrack(CalorieTrackDTO calorieTrackDTO){
