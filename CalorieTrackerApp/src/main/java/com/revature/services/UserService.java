@@ -1,12 +1,34 @@
 package com.revature.services;
 
+
 import com.revature.dto.UserDTO;
+import com.revature.models.User;
+import com.revature.repositories.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-public interface UserService {
+public class UserService implements UserDetailsService {
 
-    public UserDTO registerUser(UserDTO userDTO);
+//    String registerUser(UserDTO userDTO);
+//
+//    User registerUser(String userDTO);
+//
+//    User findByUsername(String username);
+//
+//    void updateUser(User user);
+//
+//    void deleteUser(Long userId);
+//
+    @Autowired
+    private UserRepo userRepo;
 
-    // Retrieves a UserEntity object by username and password using the UserRepository and returns a UserDTO.
-//    public UserDTO loginUser(UserDTO userDTO);
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+        return userRepo.findByUsername(username).orElseThrow();
+    }
+
+
 
 }
