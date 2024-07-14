@@ -1,13 +1,10 @@
 package com.revature.controllers;
 
 import com.revature.dto.ReqRes;
-import com.revature.dto.UserDTO;
 import com.revature.models.User;
-import com.revature.services.UserService;
 import com.revature.services.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;

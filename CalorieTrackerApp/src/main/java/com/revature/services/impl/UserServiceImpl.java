@@ -17,6 +17,14 @@ import java.util.List;
 import java.util.Optional;
 
 
+
+/*
+ * UserServiceImpl class provides the implementation for the UserService interface.
+ * It handles user registration, login, and management functionalities such as updating,
+ * deleting, and retrieving user information. It also manages JWT token generation and
+ * validation for authentication purposes.
+ */
+
 @Service
 public class UserServiceImpl {
 
@@ -39,11 +47,11 @@ public class UserServiceImpl {
             User user = new User();
             user.setUsername(registrationRequest.getUsername());
             user.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
+            user.setRole(registrationRequest.getRole());
 
-            //NEED MORE IF WE ARE INCLUDING MORE COLUMS IN DB TABLE SUCH AS ROLE or NAME
-//            user.setUsername(registrationRequest.getUsername());
-//            user.setUsername(registrationRequest.getUsername());
-//            user.setUsername(registrationRequest.getUsername());
+            //NEED MORE IF WE ARE INCLUDING MORE COLUMS IN DB TABLE SUCH AS NAME
+//            user.setName(registrationRequest.getName());
+
 
             User userResult = userRepo.save(user);
 

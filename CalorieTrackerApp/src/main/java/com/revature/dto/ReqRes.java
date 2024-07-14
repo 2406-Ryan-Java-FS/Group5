@@ -10,6 +10,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+
+//This is UserDTO, renamed to avoid confusion
+
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,6 +33,8 @@ public class ReqRes {
     private String password;
     private User user;
     private List<User> userList;
+
+    private String role;
 
 
 

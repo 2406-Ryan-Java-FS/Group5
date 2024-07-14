@@ -1,9 +1,7 @@
 package com.revature.config;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
@@ -11,6 +9,12 @@ import javax.crypto.spec.SecretKeySpec;
 import java.util.*;
 import java.util.function.Function;
 import java.nio.charset.StandardCharsets;
+
+/*
+ * JWTUtils is a utility class for generating, validating, and extracting information from JWT tokens.
+ * It provides methods to create tokens, extract claims, and check token validity.
+ */
+
 
 @Component
 public class JWTUtils {

@@ -29,12 +29,12 @@ public class User implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "role", nullable = false)
+    private String role;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Assuming all users have a "USER" role for simplicity
-        //If we want admin user than we need a new coumn in db set to a string
-        // and variableName 'role' would go where 'ROLE_USER' is written
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return List.of(new SimpleGrantedAuthority(role));
     }
 
     @Override
@@ -45,22 +45,22 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true; // Modify as needed
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true; // Modify as needed
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true; // Modify as needed
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return true; // Modify as needed
+        return true;
     }
 
 }
