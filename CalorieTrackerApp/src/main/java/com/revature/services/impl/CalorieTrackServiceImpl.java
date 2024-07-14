@@ -6,6 +6,7 @@ import com.revature.models.CalorieTrack;
 import com.revature.repositories.CalorieTrackRepo;
 import com.revature.services.CalorieTrackService;
 import com.revature.services.Result;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class CalorieTrackServiceImpl implements CalorieTrackService {
 
     @Autowired
@@ -98,10 +100,10 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
         CalorieTrack calorieTrack = calorieTrackRepo.save(convertCalorieTrackDTOTOCalorieTrack(calorieTrackDTO));
 
         //if it returns null meaning update operation went wrong, return result with error messages.
-        if(calorieTrack == null){
-            String msg = String.format("cId: %s, not found", calorieTrack.getCId());
-            result.addErrorMessage(msg);
-        }
+//        if(calorieTrack == null){
+//            String msg = String.format("cId: %s, not found", calorieTrack.getCId());
+//            result.addErrorMessage(msg);
+//        }
 
         //if update is successful, convert the entity into DTO and set Payload.
         CalorieTrackDTO returnedCalorieTrackDTO = convertCalorieTrackToCalorieTrackDTO(calorieTrack);
