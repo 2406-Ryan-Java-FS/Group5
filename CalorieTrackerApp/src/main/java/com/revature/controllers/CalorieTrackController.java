@@ -26,6 +26,9 @@ public class CalorieTrackController {
     @GetMapping("/{cId}")
     public ResponseEntity<CalorieTrackDTO> getCalorieTrack(@PathVariable int cId){
         CalorieTrackDTO calorieTrackDTO = calorieTrackService.getCalories(cId);
+        if(calorieTrackDTO == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(calorieTrackDTO, HttpStatus.OK);
     }
 
@@ -34,13 +37,13 @@ public class CalorieTrackController {
         return calorieTrackService.getCaloriesByUser(uId);
     }
 
-    @GetMapping
+    @GetMapping("/search")
     public List<CalorieTrackDTO> getCaloriesByUserAndDate(@RequestParam int uId,
                                                           @RequestParam LocalDate logDate){
         return calorieTrackService.getCaloriesByUserAndDate(uId, logDate);
     }
 
-    @GetMapping
+    @GetMapping("/search")
     public List<CalorieTrackDTO> getCaloriesByUserAndDateBetween(@RequestParam int uId,
                                                                  @RequestParam LocalDate logDateStart,
                                                                  @RequestParam LocalDate logDateEnd){
