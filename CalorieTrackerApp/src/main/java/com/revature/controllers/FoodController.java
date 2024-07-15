@@ -31,6 +31,7 @@ public class FoodController {
     public List<FoodDTO> getAllFoodItems(){
         System.out.println("Controller activated");
         List<FoodDTO> list = foodService.getAllFoodItems();
+        System.out.println("food list: " + list);
         return list;
     }
 

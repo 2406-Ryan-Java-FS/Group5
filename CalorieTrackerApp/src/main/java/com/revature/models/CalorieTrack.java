@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,10 +31,13 @@ public class CalorieTrack {
     // foreign keys
     @ManyToOne
     @JoinColumn(name = "u_id", nullable = false)
+    @JsonBackReference
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "f_id", nullable = false)
+    @JsonBackReference
+//    @JsonBackReference(value="user")
     private Food food;
 
 //    @Column

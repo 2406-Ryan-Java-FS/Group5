@@ -10,4 +10,10 @@ public class UserServiceImpl implements UserService {
     public UserDTO registerUser(UserDTO userDTO) {
         return null;
     }
+
+    @Override
+    public UserDTO getUser(int uId) {
+//        User user
+        return null;
+    }
 }

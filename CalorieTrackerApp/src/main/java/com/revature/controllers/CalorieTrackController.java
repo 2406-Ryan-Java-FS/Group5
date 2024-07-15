@@ -50,23 +50,35 @@ public class CalorieTrackController {
     @GetMapping("/user/{uId}/date")
     public List<CalorieTrackDTO> getCaloriesByUserAndDate(@PathVariable int uId,
                                                           @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate logDate){
-        return calorieTrackService.getCaloriesByUserAndDate(uId, logDate);
+        System.out.println("logDate: " + logDate);
+        System.out.println("userId: " + uId);
+        List<CalorieTrackDTO> calorieTrackDTOS = calorieTrackService.getCaloriesByUserAndDate(uId, logDate);
+        System.out.println("list at controller" + calorieTrackDTOS);
+
+        return calorieTrackDTOS;
     }
 
     @GetMapping("/user/{uId}/date-between")
     public List<CalorieTrackDTO> getCaloriesByUserAndDateBetween(@PathVariable int uId,
                                                                  @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate logDateStart,
                                                                  @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate logDateEnd){
+        System.out.println("Controller - getCaloriesByUserAndDateBetween");
         return calorieTrackService.getCaloriesByUserAndDateBetween(uId, logDateStart, logDateEnd);
     }
 
     @PostMapping
     public ResponseEntity<?> createCalorieTrack(@RequestBody CalorieTrackDTO calorieTrackDTO){
         // Get the Result of CalorieTrack
+        System.out.println("Post controller");
+        System.out.println("CalorieTrackDTO: " + calorieTrackDTO);
+        System.out.println(calorieTrackDTO.toString());
+        System.out.println("userId: " + calorieTrackDTO.getUId());
+        System.out.println("foodId: " +calorieTrackDTO.getFId());
         Result<CalorieTrackDTO> result = calorieTrackService.createCalorieTrack(calorieTrackDTO);
-
+        System.out.println(result);
         //If creation went successful, it will return payload of result which has a CalorieTrackDTO object.
         if(result.isSuccess()){
+            System.out.println("post succedd");
             return new ResponseEntity<>(result.getPayload(),HttpStatus.CREATED);
         }
         //Else return BAD_REQUEST

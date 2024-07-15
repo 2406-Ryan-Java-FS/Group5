@@ -1,5 +1,7 @@
 package com.revature.dto;
 
+import com.revature.models.Food;
+import com.revature.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,8 +18,8 @@ public class CalorieTrackDTO {
     private int cId;
     private double serving;
     private LocalDate logDate;
-
-    // foreign keys
     private int uId;
     private int fId;
+
+
 }

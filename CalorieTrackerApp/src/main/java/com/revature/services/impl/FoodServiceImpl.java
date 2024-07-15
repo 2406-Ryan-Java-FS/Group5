@@ -54,7 +54,7 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public List<FoodDTO> getFoodItemsByNameContaining(String foodName) {
-        List<Food> foodList = foodRepo.findAllByFoodNameContaining(foodName);
+        List<Food> foodList = foodRepo.findAllByFoodNameContainingIgnoreCase(foodName);
         List<FoodDTO> foodDTOS = new ArrayList<>();
         for(Food food: foodList){
             foodDTOS.add(convertFoodTOFoodDTO(food));
