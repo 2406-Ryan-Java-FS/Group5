@@ -15,11 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional
+//@Transactional
 public class CalorieTrackServiceImpl implements CalorieTrackService {
 
-    @Autowired
-    CalorieTrackRepo calorieTrackRepo;
+    private final CalorieTrackRepo calorieTrackRepo;
+
+    public CalorieTrackServiceImpl(CalorieTrackRepo calorieTrackRepo) {
+        this.calorieTrackRepo = calorieTrackRepo;
+    }
+
 
     @Override
     public CalorieTrackDTO getCalories(int cId) {
@@ -29,7 +33,7 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
 
     @Override
     public List<CalorieTrackDTO> getCaloriesByUser(int uId) {
-        List<CalorieTrack> calorieTrackList = calorieTrackRepo.findAllByUId(uId);
+        List<CalorieTrack> calorieTrackList = calorieTrackRepo.findAllByUser_uId(uId);
         List<CalorieTrackDTO> calorieTrackDTOS = new ArrayList<>();
         if(calorieTrackList != null && !calorieTrackList.isEmpty()){
             for(CalorieTrack ct: calorieTrackList){
@@ -41,26 +45,28 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
 
     @Override
     public List<CalorieTrackDTO> getCaloriesByUserAndDate(int uId, LocalDate logDate) {
-        List<CalorieTrack> calorieTrackList = calorieTrackRepo.findAllByUIdAndLogDate(uId, logDate);
-        List<CalorieTrackDTO> calorieTrackDTOS = new ArrayList<>();
-        if(calorieTrackList != null && !calorieTrackList.isEmpty()){
-            for(CalorieTrack ct: calorieTrackList){
-                calorieTrackDTOS.add(convertCalorieTrackToCalorieTrackDTO(ct));
-            }
-        }
-        return calorieTrackDTOS;
+//        List<CalorieTrack> calorieTrackList = calorieTrackRepo.findAllByUser_uIdAndLogDate(uId, logDate);
+//        List<CalorieTrackDTO> calorieTrackDTOS = new ArrayList<>();
+//        if(calorieTrackList != null && !calorieTrackList.isEmpty()){
+//            for(CalorieTrack ct: calorieTrackList){
+//                calorieTrackDTOS.add(convertCalorieTrackToCalorieTrackDTO(ct));
+//            }
+//        }
+//        return calorieTrackDTOS;
+        return null;
     }
 
     @Override
     public List<CalorieTrackDTO> getCaloriesByUserAndDateBetween(int uId, LocalDate logDateStart, LocalDate logDateEnd) {
-        List<CalorieTrack> calorieTrackList = calorieTrackRepo.findAllByUIdAndLogDateBetween(uId, logDateStart, logDateEnd);
-        List<CalorieTrackDTO> calorieTrackDTOS = new ArrayList<>();
-        if(calorieTrackList != null && !calorieTrackList.isEmpty()){
-            for(CalorieTrack ct: calorieTrackList){
-                calorieTrackDTOS.add(convertCalorieTrackToCalorieTrackDTO(ct));
-            }
-        }
-        return calorieTrackDTOS;
+//        List<CalorieTrack> calorieTrackList = calorieTrackRepo.findAllByUser_uIdAndLogDateBetween(uId, logDateStart, logDateEnd);
+//        List<CalorieTrackDTO> calorieTrackDTOS = new ArrayList<>();
+//        if(calorieTrackList != null && !calorieTrackList.isEmpty()){
+//            for(CalorieTrack ct: calorieTrackList){
+//                calorieTrackDTOS.add(convertCalorieTrackToCalorieTrackDTO(ct));
+//            }
+//        }
+//        return calorieTrackDTOS;
+        return null;
     }
 
 

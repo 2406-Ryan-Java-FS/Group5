@@ -12,6 +12,4 @@ public interface FoodRepo extends JpaRepository<Food, Integer> {
     Optional<Food> findById(int fId);
     Optional<Food> findByFoodName(String foodName);
     List<Food> findAllByFoodNameContaining(String foodName);
-
-    List<Food> findAll();
 }

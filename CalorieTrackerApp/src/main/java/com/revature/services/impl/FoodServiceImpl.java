@@ -16,19 +16,27 @@ import java.util.Objects;
 @Service
 public class FoodServiceImpl implements FoodService {
 
+    private final FoodRepo foodRepo;
+
     @Autowired
-    FoodRepo foodRepo;
+    public FoodServiceImpl(final FoodRepo foodRepo){
+        this.foodRepo = foodRepo;
+    }
+
 
     @Override
-    @Transactional
     public List<FoodDTO> getAllFoodItems() {
+        System.out.println("service activated");
         List<Food> foodList = foodRepo.findAll();
+        System.out.println("foodList:" + foodList);
         //Make a new list of FoodDTOs
         List<FoodDTO> foodDTOS = new ArrayList<>();
         //convert each element of food entity to foodDTO and add to the foodDTOS list.
         for(Food food: foodList){
+            System.out.println(food);
             foodDTOS.add(convertFoodTOFoodDTO(food));
         }
+        System.out.println(foodDTOS);
         return foodDTOS;
     }
 
@@ -38,11 +46,11 @@ public class FoodServiceImpl implements FoodService {
         return convertFoodTOFoodDTO(food);
     }
 
-    @Override
-    public FoodDTO getFoodItemByName(String foodName) {
-        Food food = foodRepo.findByFoodName(foodName).orElse(null);
-        return convertFoodTOFoodDTO(food);
-    }
+//    @Override
+//    public FoodDTO getFoodItemByName(String foodName) {
+//        Food food = foodRepo.findByFoodName(foodName).orElse(null);
+//        return convertFoodTOFoodDTO(food);
+//    }
 
     @Override
     public List<FoodDTO> getFoodItemsByNameContaining(String foodName) {

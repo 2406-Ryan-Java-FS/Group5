@@ -28,17 +28,11 @@ public class CalorieTrack {
     private LocalDate logDate;
 
     // foreign keys
-    @Column
-    @ManyToOne(fetch = FetchType.LAZY)
-    /*This annotation specifies the foreign key column in the database that links a shoe to its user.
-     The nullable = false part means that a shoe must always be associated with a user.*/
+    @ManyToOne
     @JoinColumn(name = "u_id", nullable = false)
     private User user;
 
-    @Column
-    @ManyToOne(fetch = FetchType.LAZY)
-    /*This annotation specifies the foreign key column in the database that links a shoe to its user.
-     The nullable = false part means that a shoe must always be associated with a user.*/
+    @ManyToOne
     @JoinColumn(name = "f_id", nullable = false)
     private Food food;
 

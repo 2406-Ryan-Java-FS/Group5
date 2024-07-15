@@ -6,8 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
-@Table(name = "foods")
+@Table(name = "food")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,8 +23,11 @@ public class Food {
     @Column(name = "food_name", unique = true, nullable = false)
     private String foodName;
 
-    @Column(name = "calorie", nullable = false)
+    @Column(name = "calories", nullable = false)
     private int calorie;
+
+    @OneToMany(mappedBy="food")
+    private List<CalorieTrack> calorieTrackList;
 
 
 }
