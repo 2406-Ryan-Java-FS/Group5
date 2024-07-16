@@ -102,7 +102,7 @@ public class ProfileServiceImpl implements ProfileService {
     // Utility methods for our implementation class
     private Profile convertProfileDTOProfileEntity(ProfileDTO profileDTO){
         return Profile.builder()
-                .gender(profileDTO.isGender())
+                .gender(profileDTO.getGender())
                 .height(profileDTO.getHeight())
                 .weight(profileDTO.getWeight())
                 .activity(profileDTO.getActivity())
@@ -113,7 +113,7 @@ public class ProfileServiceImpl implements ProfileService {
     private ProfileDTO convertProfileEntityToProfileDTO(Profile profileEntity){
         return ProfileDTO.builder()
                 .pId(profileEntity.getPId())
-                .gender(profileEntity.isGender())
+                .gender(profileEntity.getGender())
                 .height(profileEntity.getHeight())
                 .weight(profileEntity.getWeight())
                 .activity(profileEntity.getActivity())
@@ -142,7 +142,7 @@ public class ProfileServiceImpl implements ProfileService {
     // Updates the profileEntity object with details from the profileDTO.
     // Takes two arguments, the profileEntity object to be updated and the profileDTO object with the new details.
     private void updateProfileEntityFromProfileDTO(Profile profileEntity, ProfileDTO profileDTO){
-        profileEntity.setGender(profileDTO.isGender());
+        profileEntity.setGender(profileDTO.getGender());
         profileEntity.setHeight(profileDTO.getHeight());
         profileEntity.setWeight(profileDTO.getWeight());
         profileEntity.setActivity(profileDTO.getActivity());

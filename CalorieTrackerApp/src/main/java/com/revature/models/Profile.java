@@ -19,7 +19,7 @@ public class Profile {
         private int pId;
 
         @Column(name = "gender", nullable = false)
-        private boolean gender;
+        private String gender;
 
         @Column(name = "height", nullable = false)
         private double height;
@@ -33,7 +33,7 @@ public class Profile {
         @Column(name = "calorie_goal", nullable = false)
         private int calorieGoal;
 
-        @Column
+//        @Column
         @OneToOne(fetch = FetchType.LAZY)
     /*This annotation specifies the foreign key column in the database that links a shoe to its user.
      The nullable = false part means that a shoe must always be associated with a user.*/

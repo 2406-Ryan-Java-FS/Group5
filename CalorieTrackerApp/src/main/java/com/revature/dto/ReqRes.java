@@ -14,28 +14,28 @@ import java.util.List;
 //This is UserDTO, renamed to avoid confusion
 
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class ReqRes {
-
-    private int uId;
-    private int statusCode;
-    private String error;
-    private String message;
-    private String token;
-    private String refreshToken;
-    private String expirationTime;
-    private String username;
-    private String password;
-    private User user;
-    private List<User> userList;
-
-    private String role;
-
-
-
-}
+//@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@Builder
+//@JsonInclude(JsonInclude.Include.NON_NULL)
+//@JsonIgnoreProperties(ignoreUnknown = true)
+//public class ReqRes {
+//
+//    private int uId;
+//    private int statusCode;
+//    private String error;
+//    private String message;
+//    private String token;
+//    private String refreshToken;
+//    private String expirationTime;
+//    private String username;
+//    private String password;
+//    private User user;
+//    private List<User> userList;
+//
+//    private String role;
+//
+//
+//
+//}
