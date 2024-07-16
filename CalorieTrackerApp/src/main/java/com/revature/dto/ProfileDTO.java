@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ProfileDTO {
     private int pId;
-    private boolean gender;
+    private String gender;
     private double height;
     private double weight;
     private int activity;
