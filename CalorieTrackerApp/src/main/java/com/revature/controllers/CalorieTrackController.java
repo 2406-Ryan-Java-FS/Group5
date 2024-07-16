@@ -103,6 +103,7 @@ public class CalorieTrackController {
     @DeleteMapping("/{cId}")
     public ResponseEntity<Void> deleteCalorieTrackById(@PathVariable int cId){
         boolean wasDeleted = calorieTrackService.deleteCalorieTrack(cId);
+        System.out.println(wasDeleted);
         return new ResponseEntity<>(wasDeleted? HttpStatus.NO_CONTENT: HttpStatus.NOT_FOUND);
     }
 }

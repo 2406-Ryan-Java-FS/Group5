@@ -36,6 +36,7 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
     @Override
     public CalorieTrackDTO getCalories(int cId) {
         CalorieTrack calorieTrack = calorieTrackRepo.findById(cId).orElseThrow(() -> new CalorieTrackNotFoundException("Calorie Track not found"));
+//        CalorieTrack calorieTrack = calorieTrackRepo.findById(cId).orElse(null);
         return convertCalorieTrackToCalorieTrackDTO(calorieTrack);
     }
 
@@ -130,7 +131,8 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
         //when Id doesn't exist in the database.
         try{
             CalorieTrackDTO calorieTrackDTO = getCalories(cId);
-            if(calorieTrackDTO.getCId() != cId){
+            if(calorieTrackDTO.getCId() == cId){
+
                 calorieTrackRepo.deleteById(cId);
                 return true;
             }

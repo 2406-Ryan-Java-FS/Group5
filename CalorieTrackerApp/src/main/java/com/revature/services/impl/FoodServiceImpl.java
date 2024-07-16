@@ -64,6 +64,7 @@ public class FoodServiceImpl implements FoodService {
 
     private Food convertFoodDTOToFood(FoodDTO foodDTO){
         return Food.builder()
+                .fId(foodDTO.getFId())
                 .foodName(foodDTO.getFoodName())
                 .calorie(foodDTO.getCalorie())
                 .build();
