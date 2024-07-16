@@ -1,11 +1,6 @@
 package com.revature.models;
 
-<<<<<<< HEAD
-import java.util.*;
-=======
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
->>>>>>> hayoung
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
