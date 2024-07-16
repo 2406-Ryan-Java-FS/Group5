@@ -42,7 +42,6 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-
     @Override
     // Takes a userDTO object as its parameter(the userDTO object contains getUsername() and get.Password() methods)
     // and returns a userDTO object. Which will be handled in the controller methods.

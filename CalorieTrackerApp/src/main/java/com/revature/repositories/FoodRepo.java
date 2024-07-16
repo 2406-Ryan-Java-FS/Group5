@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface FoodRepo extends JpaRepository<Food, Integer> {
     Optional<Food> findById(int fId);
     Optional<Food> findByFoodName(String foodName);
+    List<Food> findAllByFoodNameContainingIgnoreCase(String foodName);
 
-//    List<Food> findAll();
 }

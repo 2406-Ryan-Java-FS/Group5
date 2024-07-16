@@ -11,23 +11,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.core.Authentication;
 //import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/user")
+@RequestMapping("/api/user")
 public class UserController {
-
-//    @Autowired
-//    private UserServiceImpl userServiceImpl;
-
 
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService) {
         this.userService = userService;
 
     }
@@ -68,7 +65,7 @@ public class UserController {
     }
 
     // get user by specifying their id
-    @GetMapping("/{userId}")
+    @GetMapping("/{uId}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable int uId){
         try {
             UserDTO user = userService.getUserById(uId);
@@ -79,7 +76,7 @@ public class UserController {
     }
 
     // update user
-    @PutMapping("/{userId}")
+    @PutMapping("/{uId}")
     public ResponseEntity<UserDTO>updateUser(@PathVariable int uId, @RequestBody UserDTO userDTO){
 
         try{

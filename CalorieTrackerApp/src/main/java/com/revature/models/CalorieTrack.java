@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,18 +29,18 @@ public class CalorieTrack {
     private LocalDate logDate;
 
     // foreign keys
-//    @Column
     @ManyToOne(fetch = FetchType.LAZY)
     /*This annotation specifies the foreign key column in the database that links a shoe to its user.
      The nullable = false part means that a shoe must always be associated with a user.*/
     @JoinColumn(name = "u_id", nullable = false)
+    @JsonBackReference
     private User user;
 
-//    @Column
     @ManyToOne(fetch = FetchType.LAZY)
     /*This annotation specifies the foreign key column in the database that links a shoe to its user.
      The nullable = false part means that a shoe must always be associated with a user.*/
-    @JoinColumn(name = "f_id", nullable = true)
+    @JoinColumn(name = "f_id", nullable = false)
+    @JsonBackReference
     private Food food;
 
 //    @Column

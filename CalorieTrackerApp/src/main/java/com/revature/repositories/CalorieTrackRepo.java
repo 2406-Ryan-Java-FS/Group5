@@ -2,6 +2,8 @@ package com.revature.repositories;
 
 import com.revature.models.CalorieTrack;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -11,12 +13,32 @@ import java.util.Optional;
 @Repository
 public interface CalorieTrackRepo extends JpaRepository<CalorieTrack, Integer> {
     Optional<CalorieTrack> findById(int cId);
-    List<CalorieTrack> findAllByUId(int uId);
 
-     List<CalorieTrack> findAllByUIdAndLogDate(int uId, LocalDate logDate);
+    @Query("""
+            select ct from CalorieTrack ct
+            inner join fetch ct.user u
+            inner join fetch ct.food f
+            where u.uId = :uId
+            """)
+    List<CalorieTrack> findAllByUser_uId(@Param("uId") int uId);
 
-    List<CalorieTrack> findAllByDateTimeBetween(
-            LocalDate logDateStart,
-            LocalDate logDateEnd);
+    @Query("""
+            select ct from CalorieTrack ct
+            inner join fetch ct.user u
+            inner join fetch ct.food f
+            where u.uId = :uId and ct.logDate = :logDate
+            """)
+    List<CalorieTrack> findAllByUser_uIdAndLogDate(@Param("uId") int uId, @Param("logDate") LocalDate logDate);
+
+    @Query("""
+            select ct from CalorieTrack ct
+            inner join fetch ct.user u
+            inner join fetch ct.food f
+            where u.uId = :uId and ct.logDate between :logDateStart and :logDateEnd
+            """)
+    List<CalorieTrack> findAllByUser_uIdAndLogDateBetween(
+            @Param("uId") int uId,
+            @Param("logDateStart") LocalDate logDateStart,
+            @Param("logDateEnd") LocalDate logDateEnd);
 
 }

@@ -1,11 +1,18 @@
 package com.revature.models;
 
+<<<<<<< HEAD
 import java.util.*;
+=======
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+>>>>>>> hayoung
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -28,6 +35,10 @@ public class User{
 
     @Column(name = "role", nullable = false)
     private String role;
+
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference(value = "user")
+    private List<CalorieTrack> calorieTrackLists;
 //
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -59,6 +70,8 @@ public class User{
 //    public boolean isEnabled() {
 //        return true;
 //    }
+
+
 
 }
 

@@ -1,10 +1,13 @@
 package com.revature.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Table(name = "food")
@@ -23,6 +26,10 @@ public class Food {
 
     @Column(name = "calories", nullable = false)
     private int calorie;
+
+    @OneToMany(mappedBy="food")
+//    @JsonManagedReference(value = "food")
+    private List<CalorieTrack> calorieTrackList;
 
 
 }
