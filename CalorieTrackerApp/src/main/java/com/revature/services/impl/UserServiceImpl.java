@@ -169,6 +169,7 @@ public class UserServiceImpl implements UserService {
         return User.builder()
                 .username(userDTO.getUsername())
                 .password(userDTO.getPassword())
+                .role(userDTO.getRole())
                 .build();
     }
 
@@ -181,6 +182,7 @@ public class UserServiceImpl implements UserService {
                 .uId(userEntity.getUId())
                 .username(userEntity.getUsername())
                 .password(userEntity.getPassword())
+                .role(userEntity.getRole())
                 .build();
 
     }
