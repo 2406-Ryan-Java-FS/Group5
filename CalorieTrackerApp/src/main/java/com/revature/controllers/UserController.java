@@ -91,7 +91,7 @@ public class UserController {
 
     }
 
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/{uId}")
     public ResponseEntity<Void> deleteUser(@PathVariable int uId) {
 
         try{
