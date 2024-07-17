@@ -27,9 +27,8 @@ public class Food {
     @Column(name = "calories", nullable = false)
     private int calorie;
 
-    @OneToMany(mappedBy="food")
+//    @OneToMany(mappedBy="food")
 //    @JsonManagedReference(value = "food")
-    private List<CalorieTrack> calorieTrackList;
-
+//    private List<CalorieTrack> calorieTrackList;
 
 }
