@@ -72,8 +72,6 @@ public class CalorieTrackController {
         System.out.println("Post controller");
         System.out.println("CalorieTrackDTO: " + calorieTrackDTO);
         System.out.println(calorieTrackDTO.toString());
-        System.out.println("userId: " + calorieTrackDTO.getUId());
-        System.out.println("foodId: " +calorieTrackDTO.getFId());
         Result<CalorieTrackDTO> result = calorieTrackService.createCalorieTrack(calorieTrackDTO);
         System.out.println(result);
         //If creation went successful, it will return payload of result which has a CalorieTrackDTO object.
