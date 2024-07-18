@@ -153,7 +153,7 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
             result.addErrorMessage("CalorieTrack cannot be null");
             return result;
         }
-        if(calorieTrackDTO.getUser().getUId() == 0){
+        if(calorieTrackDTO.getUId() == 0){
             // throw userNotFoundException("UserId is required")
             result.addErrorMessage("UserId is required");
         }
@@ -169,7 +169,7 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
 
     private CalorieTrack convertCalorieTrackDTOTOCalorieTrack(CalorieTrackDTO calorieTrackDTO){
         // change exception.
-        User user = userRepository.findById(calorieTrackDTO.getUser().getUId()).orElseThrow(() -> new CalorieTrackNotFoundException("user is not found"));
+        User user = userRepository.findById(calorieTrackDTO.getUId()).orElseThrow(() -> new CalorieTrackNotFoundException("user is not found"));
         Food food = foodRepository.findById(calorieTrackDTO.getFood().getFId()).orElseThrow(() -> new FoodNotFoundException("food cannot be found"));
         CalorieTrack calorieTrack = new CalorieTrack();
         calorieTrack.setCId(calorieTrackDTO.getCId()); // Assuming setCId method exists
@@ -191,8 +191,8 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
                 calorieTrack.getCId(),
                 calorieTrack.getServing(),
                 calorieTrack.getLogDate(),
-                convertUserToUserDTO(calorieTrack.getUser()),
-                convertFoodToFoodDTO(calorieTrack.getFood())
+                convertFoodToFoodDTO(calorieTrack.getFood()),
+                calorieTrack.getUser().getUId()
         );
 //        return CalorieTrackDTO.builder()
 //                .cId(calorieTrack.getCId())
@@ -202,13 +202,7 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
 //                .fId(calorieTrack.getFood().getFId())
 //                .build();
     }
-    private UserDTO convertUserToUserDTO(User user){
-        return UserDTO.builder()
-                .uId(user.getUId())
-                .username(user.getUsername())
-                .role(user.getRole())
-                .build();
-    }
+
     private FoodDTO convertFoodToFoodDTO(Food food){
         return FoodDTO.builder()
                 .fId(food.getFId())

@@ -18,10 +18,9 @@ public class CalorieTrackDTO {
     private int cId;
     private double serving;
     private LocalDate logDate;
-    private UserDTO user;
+//    private UserDTO user;
     private FoodDTO food;
-//    private int uId;
+    private int uId;
 //    private int fId;
-
 
 }

@@ -1,5 +1,5 @@
 import CalorieTrackTable from "./calorie-track-table";
-
+import {Link} from "react-router-dom";
 
 export default function CalorieTrackView(){
     
@@ -9,7 +9,7 @@ export default function CalorieTrackView(){
 
     return (<div className="container">
         <h1>My calorie goal: </h1>
-        <button type="button" className="btn btn-primary">+</button>
+        <Link type="button" className="btn btn-primary" to={'/calorietrack/add'} id='addCalorieTrackBtn'>+</Link>
         <div className="week-button">
             <button type="button" className="btn btn-outline-primary btn-sm">Previous Week</button>
             <button type="button" className="btn btn-outline-primary btn-sm">Next Week</button>
