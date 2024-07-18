@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
     }
     // This method retrieves a user by their ID. Helpful for User management.
     @Override
-    public UserDTO getUserById(int uId){
+    public UserDTO getUserById(Integer uId){
         // Retrieve a user from the DB using the UserRepository.findById() method or else return null
         User userEntity = userRepository.findById(uId)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
@@ -120,7 +120,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO updateUser(int uId, UserDTO userDTO){
+    public UserDTO updateUser(Integer uId, UserDTO userDTO){
         // Retrieve the user from the DB using their Id and if they dont exist throw an exception.
         User userEntity = userRepository.findById(uId)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
@@ -150,7 +150,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(int uId) {
+    public void deleteUser(Integer uId) {
         // Check if user exists in the DB using the userRepository.existsById(userId) method or else throw an exception.
         if (!userRepository.existsById(uId)) {
             throw new UserNotFoundException("User not found");

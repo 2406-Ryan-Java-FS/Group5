@@ -48,12 +48,12 @@ public interface UserService {
     public List<UserDTO> getAllUsers();
 
     // Retrieves a UserEntity object by its userId using the UserRepository and returns a UserDTO.
-    public UserDTO getUserById(int uId);
+    public UserDTO getUserById(Integer uId);
 
     // Updates a UserEntity using the UserRepository and returns a UserDTO.
-    public UserDTO updateUser(int uId, UserDTO userDTO);
+    public UserDTO updateUser(Integer uId, UserDTO userDTO);
 
     // Deletes a UserEntity using the UserRepository.
-    public void deleteUser(int uId);
+    public void deleteUser(Integer uId);
 }
 

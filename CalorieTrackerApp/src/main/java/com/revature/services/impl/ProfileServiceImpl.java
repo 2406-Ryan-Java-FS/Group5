@@ -4,8 +4,11 @@ import com.revature.dto.ProfileDTO;
 import com.revature.exceptions.profileexceptions.InvalidProfileDetailsException;
 import com.revature.exceptions.profileexceptions.UserProfileAlreadyExistsException;
 import com.revature.exceptions.profileexceptions.UserProfileDoesNotExistException;
+import com.revature.exceptions.userexceptions.UserNotFoundException;
 import com.revature.models.Profile;
+import com.revature.models.User;
 import com.revature.repositories.ProfileRepo;
+import com.revature.repositories.UserRepo;
 import com.revature.services.ProfileService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,28 +19,40 @@ import org.springframework.stereotype.Service;
 public class ProfileServiceImpl implements ProfileService {
 
     private final ProfileRepo profileRepo;
+    private final UserRepo userRepo;
 
     // I'm creating a dummy user with an ID of 1. The dummy user will be linked to this profile.
     //private static final int uId = 1;
 
     @Autowired
-    public ProfileServiceImpl(final ProfileRepo profileRepo){
+    public ProfileServiceImpl(final UserRepo userRepo, final ProfileRepo profileRepo){
         this.profileRepo = profileRepo;
+        this.userRepo = userRepo;
     }
 
     @Override
-    public ProfileDTO createProfile(ProfileDTO profileDTO){
+    public ProfileDTO createProfile(Integer uId, ProfileDTO profileDTO){
+
+        // Check if a registered user from the DB exists and if they do not exist, throw an exception.
+        User userEntity = userRepo.findById(uId)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
 
         // First we validate the profile details entered by the user.
         // if details are wrong, then throw an InvalidProfileDetailsException
         validateProfileDetails(profileDTO);
 
-//        // Check if user creating the profile exists in the DB.
-//        if (profileRepo.findByUserId(uId).isPresent()){
+        // Check if a profile by this user already exists in the DB.
+//        if (profileRepo.findByUser_UId(uId).isPresent()){
+//            throw new UserProfileAlreadyExistsException("A profile for this user already exists.");
+//        }
+//        if (profileRepo.findById(pId).isPresent()){
 //            throw new UserProfileAlreadyExistsException("A profile for this user already exists.");
 //        }
         // Takes in the request body(profile details) and converts it to profileEntity to be stored in DB.
         Profile profileEntity = convertProfileDTOProfileEntity(profileDTO);
+
+        // Setting the user found in the DB as the one responsible for creating this profile
+        profileEntity.setUser(userEntity);
 
         // Save the profileEntity into the DB using the profileRepo.save() method
         Profile savedProfileEntity = profileRepo.save(profileEntity);
@@ -47,7 +62,7 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public ProfileDTO getProfile(int pId) {
+    public ProfileDTO getProfile(Integer pId) {
 
         // check if the profile is present in the DB, otherwise throw a UserProfileDoesNotExistException
         Profile profileEntity = profileRepo.findById(pId)
@@ -58,9 +73,11 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public ProfileDTO updateProfile(int pId, ProfileDTO profileDTO) {
+    public ProfileDTO updateProfile(Integer uId, Integer pId, ProfileDTO profileDTO) {
 
         // Check if the profile to be updated exists in the DB.
+//        Profile existingProfileEntity = profileRepo.findByPIdAndUser_UId(pId, uId)
+//                .orElseThrow(() -> new UserProfileDoesNotExistException("User profile not found."));
         Profile existingProfileEntity = profileRepo.findById(pId)
                 .orElseThrow(() -> new UserProfileDoesNotExistException("User profile not found."));
 
@@ -78,15 +95,18 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public void deleteProfile(int pId) {
+    public void deleteProfile(Integer uId, Integer pId) {
 
         // check if the profile exists in the DB using its ID. If it doesn't exist then throw the UserProfileDoesNotExistException.
         if (!profileRepo.existsById(pId)) {
             throw new UserProfileDoesNotExistException("User profile not found");
         }
+//       Profile profileEntity = profileRepo.findByPIdAndUser_UId(pId, uId)
+//               .orElseThrow(() -> new UserProfileDoesNotExistException("User profile not found"));
 
         //otherwise delete the profile from the DB using profileRepo.deleteById() method.
-        profileRepo.deleteById(pId);
+         profileRepo.deleteById(pId);
+//        profileRepo.delete(profileEntity);
     }
 
 //    @Override
@@ -120,6 +140,7 @@ public class ProfileServiceImpl implements ProfileService {
                 .calorieGoal(profileEntity.getCalorieGoal())
 //                // include the dummy user's id when converting the profileEntity object back to a DTO object.
 //                .uId(uId)
+                .uId(profileEntity.getUser().getUId())
                 .build();
     }
 

@@ -16,7 +16,7 @@ public class Profile {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "p_id", updatable = false)
-        private int pId;
+        private Integer pId;
 
         @Column(name = "gender", nullable = false)
         private String gender;
@@ -35,8 +35,6 @@ public class Profile {
 
 
         @OneToOne(fetch = FetchType.LAZY)
-    /*This annotation specifies the foreign key column in the database that links a shoe to its user.
-     The nullable = false part means that a shoe must always be associated with a user.*/
         @JoinColumn(name = "u_id", nullable = false)
         private User user;
 
