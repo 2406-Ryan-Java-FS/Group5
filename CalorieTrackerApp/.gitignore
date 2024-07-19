@@ -32,3 +32,9 @@ src/main/resources/application.properties
 
 ### VS Code ###
 .vscode/
+
+### Environment Variables ###
+.env
+
+# Ignoring application.properties to avoid committing sensitive information
+src/main/resources/application.properties

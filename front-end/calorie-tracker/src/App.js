@@ -11,7 +11,7 @@ import ProfileForm from "./components/profile-form";
 import { AuthProvider } from "./AuthContext";
 import Error from "./components/Error";
 import CalorieTrackDelete from "./components/calorie-track/calorie-track-delete";
-
+import BmiCalculator from "./components/bmi-calculator";
 
 function App() {
   return (<>
@@ -36,6 +36,7 @@ function App() {
 
 
     <Route path="*" element={<Error />} />
+    <Route path="bmi-calculator" element={<BmiCalculator />} />
 
   </Routes>
 
