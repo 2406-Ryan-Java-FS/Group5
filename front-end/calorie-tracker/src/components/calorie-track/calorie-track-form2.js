@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-import {useState} from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import {useEffect, useState} from "react";
 import ValidationSummary from "../ValidationSummary";
 import {useAuth} from "../../AuthContext"
 
@@ -27,12 +27,27 @@ export default function CalorieTrackForm2({foodList}){
     }
 
    
-
-
     const[calorieTrack, setCalorieTrack] = useState(DEFAULT_CALORIE_TRACK);
 
     const [errors, setErrors] = useState([]);
     const navigate = useNavigate();
+    const {cId} = useParams();
+
+    if(cId){
+        console.log("cId: " + cId)
+    }
+
+    useEffect(() => {
+        if(cId){
+            fetch(`http://localhost:8080/api/calorietrack/${cId}`)
+            .then(res => res.json())
+            .then(setCalorieTrack)
+            .catch(error => {
+                setErrors(error);
+                navigate=("/error");
+            })
+        }
+    },[cId])
 
     // handles value changes of inputs
     const handleChange = (event) => {
@@ -49,7 +64,11 @@ export default function CalorieTrackForm2({foodList}){
     // handle submit
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        addCalorieTrack();
+        if(cId > 0){
+            editCalorieTrackForm();
+        }else{
+            addCalorieTrack();    
+        }
     }
 
     function addCalorieTrack(){
@@ -88,6 +107,33 @@ export default function CalorieTrackForm2({foodList}){
         });
     }
 
+    function editCalorieTrackForm(){
+        const config = {
+            method: "PUT",
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(calorieTrack)
+        };
+
+        fetch("http://localhost:8080/api/calorietrack/" + calorieTrack.cid, config)
+        .then(res => {
+            if(res.ok){
+                navigate('/calorietrack')
+            }else if(res.status === 400){
+                return res.json()
+            }
+        })
+        .then(errors => {
+            setErrors(errors);
+        })
+        .catch(error => {
+            console.error(error);
+            navigate("/calorietrack");
+        });
+    }
+
+
     return (<div>
         <h3>Log your calorie</h3>
         <ValidationSummary errors={errors}/>
@@ -112,6 +158,7 @@ export default function CalorieTrackForm2({foodList}){
                     <option key={food.fid} value={food.fid}>{food.foodName} - {food.calorie}cal</option>
                 ))}
                 </select>
+                {cId?<div>{calorieTrack.food.foodName}-{calorieTrack.food.calorie}cal</div>:<></>}
             </div>
             
             <div>

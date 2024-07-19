@@ -6,10 +6,10 @@ import { Route } from "react-router-dom";
 import { Routes } from "react-router-dom";
 import CalorieTrackView from "./components/calorie-track/calorie-track-view";
 import CalorieTrackForm from "./components/calorie-track/calorie-track-form";
-import FoodSearch from "./components/calorie-track/food-search";
 import ProfileView from "./components/profile-view";
 import ProfileForm from "./components/profile-form";
 import { AuthProvider } from "./AuthContext";
+import Error from "./components/Error";
 
 
 function App() {
@@ -30,7 +30,10 @@ function App() {
     {/* Calorie-track-dashboard */}
     <Route path="/calorietrack" element={<CalorieTrackView/>}/>
     <Route path="/calorietrack/add" element={<CalorieTrackForm />}/>
+    <Route path="/calorietrack/edit/:cId" element={<CalorieTrackForm/>}/>
 
+
+    <Route path="*" element={<Error />} />
 
   </Routes>
 
