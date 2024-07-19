@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../AuthContext";
+import CalorieTrackForm2 from "./calorie-track-form2";
 
 export default function CalorieTrackForm(){
+    const {user} = useAuth();
+    const uid = 1;
     const DEFAULT_CALORIE_TRACK={
         "serving": "",
         "logDate": "",
@@ -16,7 +20,10 @@ export default function CalorieTrackForm(){
 
     const[calorieTrack, setCalorieTrack] = useState(DEFAULT_CALORIE_TRACK);
     const[foodList, setFoodList] = useState([]);
+    const [searchInput, setSearchInput] = useState("");
+
     const navigate = useNavigate();
+    
 
     //Populate food search results
     function handleSearch(event){
@@ -37,14 +44,29 @@ export default function CalorieTrackForm(){
 
     }
 
-    const handleChange = (event) => {
-        const updatedCalorieTrack = {...calorieTrack};
+    function handleChange(event){
+        console.log("target"+ event.target.value)
+        setSearchInput(event.target.value);
+       }
 
-        if(event.target.name === "food"){
-            const foodId = Number.parseInt(event.target.value);
-            updatedCalorieTrack.food = foodList.find(food => food.fid === foodId)
-        }
-    }
+    return(
+        <div>
+            <h3>Search Your Food</h3>
+            {/* form for searching food */}
+            <form className="doSerachFood" onSubmit={handleSearch}>
+                <div className="col mb-2">
+                    <input type="text" className="form-control" onChange={handleChange} value={searchInput}id="searchBox"/>
+                </div>
+                <div className="col">
+                    <button className="btn btn-outline btn-primary" type = 'submit'>Search</button>
+                </div>
+            </form>
+
+            <CalorieTrackForm2 foodList={foodList}/>
+
+        </div>
+        
+    )
 
     
 

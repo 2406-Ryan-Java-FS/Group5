@@ -1,28 +1,32 @@
 import { Link, useNavigate } from "react-router-dom";
-import FoodSearch from "./food-search";
-import {useState, useRef} from "react";
+import {useState} from "react";
 import ValidationSummary from "../ValidationSummary";
+import {useAuth} from "../../AuthContext"
 
-export default function CalorieTrackForm2({selectedFood}){
+export default function CalorieTrackForm2({foodList}){
+    const {user} = useAuth();
     const uid = 1;
+
+     //TODO: getting today's date and put it as a placeholder!!!!!
+     const today = new Date();
+     const year = today.getFullYear();
+     const month = String(today.getMonth() + 1).padStart(2, '0');
+     const day = String(today.getDate()).padStart(2, '0');
+     const formattedDate = `${year}-${month}-${day}`;
+
     const DEFAULT_CALORIE_TRACK={
-        "serving": "",
-        "logDate": "",
-        "food": {
-            "foodName": "",
-            "calorie": "",
-            "fid": 0
+        serving: "",
+        logDate: formattedDate,
+        food: {
+            foodName: "",
+            calorie: "",
+            fid: 0
         },
-        "uid": {uid},
-        "cid": 0
+        uid: uid,
+        cid: 0
     }
 
-    //TODO: getting today's date and put it as a placeholder!!!!!
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    const formattedDate = `${year}-${month}-${day}`;
+   
 
 
     const[calorieTrack, setCalorieTrack] = useState(DEFAULT_CALORIE_TRACK);
@@ -31,16 +35,17 @@ export default function CalorieTrackForm2({selectedFood}){
     const navigate = useNavigate();
 
     // handles value changes of inputs
-    function handleChange(event){
-        setCalorieTrack({
-            ...calorieTrack,
-            [event.target.name]:
-                 event.target.value,
-        });
-        console.log("food: " + calorieTrack.food.foodName)
-        console.log("calorietrack: " + calorieTrack.logDate)
-    }
-    
+    const handleChange = (event) => {
+        const updatedCalorieTrack = {...calorieTrack};
+
+        if(event.target.name === "food"){
+            const foodId = Number.parseInt(event.target.value);
+            updatedCalorieTrack.food = foodList.find(food => food.fid === foodId)
+        }else{
+            updatedCalorieTrack[event.target.name] = event.target.value;
+        }
+        setCalorieTrack(updatedCalorieTrack);
+    };
     // handle submit
     const handleSubmit = (evt) => {
         evt.preventDefault();
@@ -53,7 +58,7 @@ export default function CalorieTrackForm2({selectedFood}){
 
         const config = {
             method: "POST",
-            haders:{
+            headers:{
                 'Content-Type':'application/json',
             },
             body: JSON.stringify(calorieTrack)
@@ -68,19 +73,19 @@ export default function CalorieTrackForm2({selectedFood}){
                 return res.json();
             }
         })
-        // .then(err => {
-        //     if(err){
-        //         console.log("error!")
-        //         return Promise.reject(err);
-        //     }
-        // })
-        // .catch(errs => {
-        //     if(errs.length){
-        //         setErrors(errs);
-        //     }else{
-        //         setErrors([errs]);
-        //     }
-        // });
+        .then(err => {
+            if(err){
+                console.log("error!")
+                return Promise.reject(err);
+            }
+        })
+        .catch(errs => {
+            if(errs.length){
+                setErrors(errs);
+            }else{
+                setErrors([errs]);
+            }
+        });
     }
 
     return (<div>
@@ -94,26 +99,19 @@ export default function CalorieTrackForm2({selectedFood}){
                 onChange={handleChange}/>
             </div>
             <div>
-                fId
-                <input type="number" name="fid" id="fid" 
-                value={selectedFood.fid} 
-                onChange={handleChange}/>
-            </div>
-            <div>
-                <label htmlFor="foodName" >Food : </label>
-                <input type="text" 
-                name="foodName"
-                id="foodName" 
-                value={selectedFood.foodName}
-                onChange={handleChange}></input>
-            </div>
-            <div>
-                <label htmlFor="calorie" >Calories : </label>
-                <input type="text" 
-                name="calorie"
-                id="calorie"
-                value={selectedFood.calorie} 
-                onChange={handleChange}/>
+                <label htmlFor="food">Food</label>
+                <select
+                id="food"
+                required
+                value={calorieTrack.food.fid}
+                name="food"
+                onChange={handleChange}
+                >
+                <option value="0">-- Choose --</option>
+                {foodList.map(food => (
+                    <option key={food.fid} value={food.fid}>{food.foodName} - {food.calorie}cal</option>
+                ))}
+                </select>
             </div>
             
             <div>

@@ -5,25 +5,36 @@ import NavBar from "./components/nav-bar";
 import { Route } from "react-router-dom";
 import { Routes } from "react-router-dom";
 import CalorieTrackView from "./components/calorie-track/calorie-track-view";
-import CalorieTrackForm from "./components/calorie-track/calorie-track-form2";
+import CalorieTrackForm from "./components/calorie-track/calorie-track-form";
 import FoodSearch from "./components/calorie-track/food-search";
+import ProfileView from "./components/profile-view";
+import ProfileForm from "./components/profile-form";
+import { AuthProvider } from "./AuthContext";
+
 
 function App() {
   return (<>
+<AuthProvider>
 <NavBar />
-
   <Routes>
     <Route path='' element={<Home />} />
 
     <Route path='login' element={<LoginPage />} />
 
-    <Route path='signup' element={<SignUpPage/>} />
+    <Route path='signup' element={<SignUpPage />} />
+
+    <Route path="profile" element={<ProfileView />} />
+
+    <Route path="profile/form" element={<ProfileForm />} />
 
     {/* Calorie-track-dashboard */}
     <Route path="/calorietrack" element={<CalorieTrackView/>}/>
     <Route path="/calorietrack/add" element={<CalorieTrackForm />}/>
 
+
   </Routes>
+
+  </AuthProvider>
   </>);
 
 }

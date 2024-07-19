@@ -19,6 +19,7 @@ public interface CalorieTrackRepo extends JpaRepository<CalorieTrack, Integer> {
             inner join fetch ct.user u
             inner join fetch ct.food f
             where u.uId = :uId
+            order by ct.cId
             """)
     List<CalorieTrack> findAllByUser_uId(@Param("uId") int uId);
 
@@ -27,6 +28,7 @@ public interface CalorieTrackRepo extends JpaRepository<CalorieTrack, Integer> {
             inner join fetch ct.user u
             inner join fetch ct.food f
             where u.uId = :uId and ct.logDate = :logDate
+            order by ct.cId
             """)
     List<CalorieTrack> findAllByUser_uIdAndLogDate(@Param("uId") int uId, @Param("logDate") LocalDate logDate);
 
@@ -35,6 +37,7 @@ public interface CalorieTrackRepo extends JpaRepository<CalorieTrack, Integer> {
             inner join fetch ct.user u
             inner join fetch ct.food f
             where u.uId = :uId and ct.logDate between :logDateStart and :logDateEnd
+            order by ct.cId
             """)
     List<CalorieTrack> findAllByUser_uIdAndLogDateBetween(
             @Param("uId") int uId,

@@ -8,10 +8,8 @@ export default function FoodSearch(){
    const [foodList, setFoodList] = useState([]);
    const [searchInput, setSearchInput] = useState("");
 
-   const [selectedFood, setSelectedFood] = useState([]);
-
    const handleFoodFromChild = (food) =>{
-        setSelectedFood(food);
+        // setSelectedFood(food);
    }
  
    const navigate = useNavigate();
@@ -78,7 +76,7 @@ export default function FoodSearch(){
                 )}
         </div>
         <div>
-            {<CalorieTrackForm selectedFood = {selectedFood}/>}
+            {/* {<CalorieTrackForm selectedFood = {selectedFood}/>} */}
         </div>
         </div>
     )

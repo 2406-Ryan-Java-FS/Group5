@@ -1,36 +1,43 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/login.css';
+import { useAuth } from '../AuthContext';
 
-export default function LoginPage(){
+export default function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
 
-        // Example: Send login credentials to backend
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
-        });
+        try {
+            const response = await fetch('http://localhost:8080/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
 
-        if (response.ok) {
-            // Redirect or handle successful login
-            console.log('Login successful');
-        } else {
-            // Handle login error
-            console.error('Login failed');
+            if (response.ok) {
+                const userData = await response.json();
+                console.log('Login successful', userData);
+                login(userData);
+                // Handle successful login, e.g., store user data, redirect to profile
+                navigate('/profile');
+            } else {
+                const errorData = await response.json();
+                console.error('Login failed:', errorData);
+            }
+        } catch (error) {
+            console.error('Login error:', error);
         }
+    };
 
-    }
-
-
-    return (<>
-     <div className="login-container">
+    return (
+        <div className="login-container">
             <h2>Login</h2>
             <form onSubmit={handleLogin}>
                 <label>
@@ -57,7 +64,5 @@ export default function LoginPage(){
                 Don't have an account? <Link to="/signup">Sign Up</Link>
             </p>
         </div>
-    
-    
-    </>)
+    );
 }
