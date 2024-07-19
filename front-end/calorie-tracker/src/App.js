@@ -5,7 +5,7 @@ import NavBar from "./components/nav-bar";
 import { Route } from "react-router-dom";
 import { Routes } from "react-router-dom";
 import CalorieTrackView from "./components/calorie-track/calorie-track-view";
-import CalorieTrackForm from "./components/calorie-track/calorie-track-form";
+import CalorieTrackForm from "./components/calorie-track/calorie-track-form2";
 import FoodSearch from "./components/calorie-track/food-search";
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
 
     {/* Calorie-track-dashboard */}
     <Route path="/calorietrack" element={<CalorieTrackView/>}/>
-    <Route path="/calorietrack/add" element={<FoodSearch />}/>
+    <Route path="/calorietrack/add" element={<CalorieTrackForm />}/>
 
   </Routes>
   </>);

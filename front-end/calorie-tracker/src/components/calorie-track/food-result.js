@@ -1,17 +1,20 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function FoodResult(food, index){
+export default function FoodResult({food, index, onDataChange}){
     
-    const [selectedFood, setSelectedFood] = useState([]);
+    const sendDataToFoodSearch = () => {
+        onDataChange(food);
+    };
+
 
     return(
         <>
             <tr>
-                <td>{index}</td>
+                <td scope="row">{food.fid}</td>
                 <td>{food.foodName}</td>
                 <td>{food.calorie}</td>
-                <td><button className="btn btn-outline-primary" onClick>Select</button></td>
+                <td><button className="btn btn-outline-primary" onClick={sendDataToFoodSearch}>Select</button></td>
             </tr>
         </>
     )

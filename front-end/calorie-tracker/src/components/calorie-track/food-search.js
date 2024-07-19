@@ -1,12 +1,18 @@
 import { useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import FoodResult from "./food-result";
-import CalorieTrackForm from "./calorie-track-form";
+import CalorieTrackForm from "./calorie-track-form2";
 
 export default function FoodSearch(){
 
    const [foodList, setFoodList] = useState([]);
    const [searchInput, setSearchInput] = useState("");
+
+   const [selectedFood, setSelectedFood] = useState([]);
+
+   const handleFoodFromChild = (food) =>{
+        setSelectedFood(food);
+   }
  
    const navigate = useNavigate();
 
@@ -25,11 +31,6 @@ export default function FoodSearch(){
                 return body;
             })
                .then(info => {
-                console.log("info: " +info)
-                console.log("typeof(info): " + typeof(info))
-                console.log("info.length: " + info.length)
-                console.log("info.data: " + info.data)
-                console.log("typeof(info.data): " + typeof(info.data))
                 setFoodList(info)
             })
             .catch(error => {
@@ -53,17 +54,31 @@ export default function FoodSearch(){
         </form>
         <div className="col" id="foodSearchResult">
         {foodList && foodList.length > 0 ? (
-                    <ul>
-                        {foodList.map((food, index) => (
-                            <li key={index}>{food.foodName} - {food.calorie} calories</li>
-                        ))}
-                    </ul>
+                    // <ul>
+                    //     {foodList.map((food, index) => (
+                    //        <div> <li key={index}>{food.foodName} - {food.calorie} calories</li> <button></button></div>
+                    //     ))}
+                    // </ul>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>FoodName</td>
+                                <td>Calories</td>
+                                <td>select?</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {foodList.map(food => {index +=1;
+                            return <FoodResult food={food} index={index} key={food.fid} onDataChange={handleFoodFromChild}/> 
+                            })}
+                        </tbody>
+                    </table>
                 ) : (
                     <p>No results found</p>
                 )}
         </div>
         <div>
-            {<CalorieTrackForm />}
+            {<CalorieTrackForm selectedFood = {selectedFood}/>}
         </div>
         </div>
     )

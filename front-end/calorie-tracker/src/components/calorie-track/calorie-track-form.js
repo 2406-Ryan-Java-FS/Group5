@@ -1,33 +1,52 @@
-import FoodSearch from "./food-search";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function CalorieTrackForm(){
     const DEFAULT_CALORIE_TRACK={
-        fid: "",
-        servings: "",
-        date: "",
+        "serving": "",
+        "logDate": "",
+        "food": {
+            "foodName": "",
+            "calorie": "",
+            "fid": 0
+        },
+        "uid": {uid},
+        "cid": 0
+    };
+
+    const[calorieTrack, setCalorieTrack] = useState(DEFAULT_CALORIE_TRACK);
+    const[foodList, setFoodList] = useState([]);
+    const navigate = useNavigate();
+
+    //Populate food search results
+    function handleSearch(event){
+        event.preventDefault();
+        console.log(`http://localhost:8080/api/food/search?foodName=${searchInput}`)
+        fetch(`http://localhost:8080/api/food/search?foodName=${searchInput}`)
+            .then(res =>{
+                const body = res.json();
+                console.log("body: " + body )
+                return body;
+            })
+               .then(info => {
+                setFoodList(info)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
     }
 
+    const handleChange = (event) => {
+        const updatedCalorieTrack = {...calorieTrack};
 
+        if(event.target.name === "food"){
+            const foodId = Number.parseInt(event.target.value);
+            updatedCalorieTrack.food = foodList.find(food => food.fid === foodId)
+        }
+    }
 
-    return (<div>
-        <form>
-            <div>
-                <input type="number" name="uId" id="uId" value="1" onChange={handleChange}></input>
-            </div>
-            <div>
-                <label htmlFor >Food : </label>
-                <input type="text"></input>
-            </div>
-            <div>
-                <label >servings : </label>
-                <input type="number" min="0"></input>
-            </div>
-            <div>
-                <label >date : </label>
-                <input type="date"></input>
-            </div>
-            
-        </form>
     
-    </div>)
+
+
 }
