@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/login.css';
+import { useAuth } from '../AuthContext';
 
 export default function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:8080/api/user/login', {
+            const response = await fetch('http://localhost:8080/api/users/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -22,6 +24,7 @@ export default function LoginPage() {
             if (response.ok) {
                 const userData = await response.json();
                 console.log('Login successful', userData);
+                login(userData);
                 // Handle successful login, e.g., store user data, redirect to profile
                 navigate('/profile');
             } else {
