@@ -1,11 +1,25 @@
-import CalorieTrackTable from "./calorie-track-table";
 import {Link} from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { format, addDays, addWeeks, subWeeks, startOfWeek, endOfWeek } from "date-fns";
 import CalorieTrackCard from "./calorie-track-card";
+import { useAuth } from "../../AuthContext";
+import CalorieTrackDelete from "./calorie-track-delete";
+import CalorieTotalCount from "./calorie-total-count";
+import CalorieGoalTitle from "./calorie-goal-title";
 
 export default function CalorieTrackView(){
 
+    const { user } = useAuth();
+    const uId = 1;
+    if(user){
+
+    }
+
+    // useEffect(() => {
+    //     if(user){
+    //         fetch(`http://localhost:8080/users/${uId}/profiles`)
+    //     }
+    // }, [])
     const [currentDate, setCurrentDate] = useState(new Date());
 
     const startOfWeekDate = startOfWeek(currentDate, { weekStartsOn: 0 }); // Week starts on Sunday
@@ -24,9 +38,12 @@ export default function CalorieTrackView(){
         setCurrentDate((prevDate) => addWeeks(prevDate, 1));
     };
 
+    
+
     return (
         <div>
-            <h1>My calorie goal: </h1>
+             <h1>My Daily Calorie Goal: </h1>
+            {/* <CalorieGoalTitle /> */}
             <div className="addCalorieBtnBox d-flex justify-content-end">
             <Link type="button" className="btn btn-primary" to={'/calorietrack/add'} id='addCalorieTrackBtn'>+</Link>
             </div>
@@ -35,9 +52,10 @@ export default function CalorieTrackView(){
                 <button onClick={handlePreviousWeek}>Previous Week</button>
                 <button onClick={handleNextWeek}>Next Week</button>
             </div>
-            <table border="1">
+            <table className="table table-border" >
                 <thead>
                     <tr>
+                        <th>Date</th>
                         {dates.map((date, index) => (
                             <th key={index}>
                                  <div className="text-center">{format(date, "yyyy-MM-dd")}</div>
@@ -49,13 +67,22 @@ export default function CalorieTrackView(){
                 </thead>
                 <tbody>
                     <tr>
+                        <th>Logs</th>
                         {dates.map((date)=>(
                              <CalorieTrackCard date={date}/>
                         ))}
                       
                     </tr>
+                    <tr>
+                        <th>Total 
+                            <div>Calorie</div> intake</th>
+                        {dates.map((date) => (
+                            <CalorieTotalCount date={date}/>
+                        ))}
+                    </tr>
                 </tbody>
             </table>
+            
         </div>
     );
 

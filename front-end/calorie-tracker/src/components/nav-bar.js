@@ -6,15 +6,14 @@ export default function NavBar({show}){
         return null;
 
     return (<>
-
         <div>
-        <nav id="navbar">
-            <Link to="">Home</Link>
-            <Link to="/profile/form">Profile</Link>
-            <Link to="/calorietrack">CalorieTrack</Link>
-            <Link to="/bmi-calculator">BMI Calculator</Link>
-        </nav>
+            <nav id="navbar">
+                <Link to="">Home</Link>
+                <Link to="/profile/form">Profile</Link>
+                <Link to="/calorietrack">CalorieTrack</Link>
+                <Link to="/bmi-calculator">BMI Calculator</Link>
+            </nav>
         </div>
-        
+
     </>)
 }
