@@ -83,7 +83,7 @@ export default function ProfileForm() {
                     </select>
                 </label>
                 <label>
-                    Calorie Goal:
+                    Calorie Goal (per day):
                     <input
                         type="number"
                         name="calorieGoal"
