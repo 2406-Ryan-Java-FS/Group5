@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import '../styles/navbar.css';
 
-export default function NavBar(){
+export default function NavBar({show}){
+    if (!show)
+        return null;
 
     return (<>
 
