@@ -4,11 +4,11 @@ import { useAuth } from '../AuthContext';
 
 
 export default function NavBar({show}){
+    const { logout } = useAuth();
     if (!show)
         return null;
-
     //function for log out 
-    const { logout } = useAuth();
+
 
 
 
