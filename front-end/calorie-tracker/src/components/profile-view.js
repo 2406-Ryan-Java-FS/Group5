@@ -37,12 +37,6 @@
 // }
 
 
-
-
-
-
-
-
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
@@ -52,8 +46,13 @@ export default function ProfileView() {
     const [profile, setProfile] = useState(null);
 
     const fetchProfile = useCallback(async () => {
+        if (!user || !user.uid) {
+            console.error('User or user.uid is not defined');
+            return;
+        }
+
         try {
-            const response = await fetch(`http://localhost:8080/api/users/${user.uid}/profiles/${user.pid}`);
+            const response = await fetch(`http://localhost:8080/api/users/${user.uid}/profiles`);
             if (response.ok) {
                 const profileData = await response.json();
                 setProfile(profileData);
@@ -66,10 +65,10 @@ export default function ProfileView() {
     }, [user]);
 
     useEffect(() => {
-        if (user) {
+        if (user && user.uid) {
             fetchProfile();
         } else {
-            console.error('User or user.id or user.pId is not defined');
+            console.error('User or user.uid is not defined');
         }
     }, [user, fetchProfile]);
 

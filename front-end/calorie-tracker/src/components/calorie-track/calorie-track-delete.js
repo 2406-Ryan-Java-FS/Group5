@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import { useLocation, useParams, useNavigate, Link } from "react-router-dom"
-import { useAuth } from "../../AuthContext";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom"
+//import { useAuth } from "../../AuthContext";
 
 export default function CalorieTrackDelete(){
-    const { user } = useAuth();
+    //const { user } = useAuth();
 
-    const location = useLocation();
+    //const location = useLocation();
     const [calorieTrack, setCalorieTrack] = useState(null);
     const[success, setSuccess] = useState(false);
     const {cId} = useParams();
@@ -31,7 +31,7 @@ export default function CalorieTrackDelete(){
             navigate("/calorietrack");
           })
       }
-    },[])
+    }, [])
 
     function handleDelete(){
       const config = {
