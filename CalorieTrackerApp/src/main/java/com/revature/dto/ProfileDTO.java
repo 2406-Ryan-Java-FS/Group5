@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ProfileDTO {
-    private int pId;
+    private Integer pId;
     private String gender;
     private double height;
     private double weight;
     private int activity;
     private int calorieGoal;
     // foreign key
-    private int uId;
+    private Integer uId;
 }
