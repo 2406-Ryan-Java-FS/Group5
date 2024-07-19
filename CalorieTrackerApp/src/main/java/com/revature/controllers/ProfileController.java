@@ -5,6 +5,7 @@ import com.revature.dto.UserDTO;
 import com.revature.models.User;
 import com.revature.services.ProfileService;
 import com.revature.services.UserService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -45,7 +46,7 @@ public class ProfileController {
 
     // THIS WILL ONLY BE ACCESSED BY THE ADMIN
     @GetMapping("/{pId}")
-    public ResponseEntity<ProfileDTO> getProfile(@PathVariable int pId){
+    public ResponseEntity<ProfileDTO> getProfile(@PathVariable Integer pId){
 
         // Call the profileService.getProfile() method to return the individual profile.
         ProfileDTO profileDTO = profileService.getProfile(pId);
@@ -53,6 +54,12 @@ public class ProfileController {
         return ResponseEntity.ok(profileDTO);
     }
 
+    @GetMapping
+    public ResponseEntity<ProfileDTO> getProfileByUserId(@PathVariable Integer uId){
+        ProfileDTO profileDTO = profileService.getProfileByUserId(uId);
+
+        return ResponseEntity.ok(profileDTO);
+    }
 
     @PutMapping("/{pId}")
     public ResponseEntity<ProfileDTO> updateProfile(@PathVariable int uId, @PathVariable int pId, @RequestBody ProfileDTO profileDTO){

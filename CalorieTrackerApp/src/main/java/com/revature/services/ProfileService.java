@@ -8,6 +8,7 @@ import com.revature.dto.UserDTO;
 public interface ProfileService {
     public ProfileDTO createProfile(Integer uId, ProfileDTO profileDTO);
     public ProfileDTO getProfile(Integer pId);
+    public ProfileDTO getProfileByUserId(Integer UId);
     public ProfileDTO updateProfile(Integer uId, Integer pId, ProfileDTO profileDTO);
     //public ProfileDTO deleteProfile(int pId);
     public void deleteProfile(Integer uId, Integer pId);
