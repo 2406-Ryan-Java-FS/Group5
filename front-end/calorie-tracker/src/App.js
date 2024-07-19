@@ -10,12 +10,13 @@ import ProfileView from "./components/profile-view";
 import ProfileForm from "./components/profile-form";
 import { AuthProvider } from "./AuthContext";
 import Error from "./components/Error";
+import CalorieTrackDelete from "./components/calorie-track/calorie-track-delete";
 
 
 function App() {
   return (<>
 <AuthProvider>
-<NavBar />
+  <NavBar />
   <Routes>
     <Route path='' element={<Home />} />
 
@@ -31,6 +32,7 @@ function App() {
     <Route path="/calorietrack" element={<CalorieTrackView/>}/>
     <Route path="/calorietrack/add" element={<CalorieTrackForm />}/>
     <Route path="/calorietrack/edit/:cId" element={<CalorieTrackForm/>}/>
+    <Route path="/calorietrack/delete/:cId" element={<CalorieTrackDelete/>} />
 
 
     <Route path="*" element={<Error />} />

@@ -1,10 +1,13 @@
-import CalorieTrackTable from "./calorie-track-table";
 import {Link} from "react-router-dom";
 import React, { useState } from "react";
 import { format, addDays, addWeeks, subWeeks, startOfWeek, endOfWeek } from "date-fns";
 import CalorieTrackCard from "./calorie-track-card";
+import { useAuth } from "../../AuthContext";
+import CalorieTrackDelete from "./calorie-track-delete";
 
 export default function CalorieTrackView(){
+
+    const { user } = useAuth();
 
     const [currentDate, setCurrentDate] = useState(new Date());
 
@@ -26,7 +29,7 @@ export default function CalorieTrackView(){
 
     return (
         <div>
-            <h1>My calorie goal: </h1>
+            <h1>My Daily Calorie Goal: </h1>
             <div className="addCalorieBtnBox d-flex justify-content-end">
             <Link type="button" className="btn btn-primary" to={'/calorietrack/add'} id='addCalorieTrackBtn'>+</Link>
             </div>
@@ -35,7 +38,7 @@ export default function CalorieTrackView(){
                 <button onClick={handlePreviousWeek}>Previous Week</button>
                 <button onClick={handleNextWeek}>Next Week</button>
             </div>
-            <table border="1">
+            <table className="table table-border" >
                 <thead>
                     <tr>
                         {dates.map((date, index) => (
@@ -56,6 +59,7 @@ export default function CalorieTrackView(){
                     </tr>
                 </tbody>
             </table>
+            <CalorieTrackDelete />
         </div>
     );
 

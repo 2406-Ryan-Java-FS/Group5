@@ -6,12 +6,9 @@ export default function CalorieTrackCard({date}){
     //Add authcontext instead!!
     const uId = 1;
     const formattedDate = format(date, 'yyyy-MM-dd');
-    console.log("forattedDate: " + formattedDate)
 
     const [ctListforADay, setCtListForADay] = useState();
     const navigate = useNavigate();
-
-    console.log("I am in calorie-track-card")
 
     useEffect(() => {
         fetch(`http://localhost:8080/api/calorietrack/user/${uId}/date?logDate=${formattedDate}`)
@@ -23,7 +20,7 @@ export default function CalorieTrackCard({date}){
         .catch(error => {
             navigate("/calorietrack")
         })
-    },[]);
+    },[formattedDate, navigate, uId]);
 
     return(
         <td>
@@ -34,10 +31,10 @@ export default function CalorieTrackCard({date}){
                     {ct.food.foodName} {ct.serving} {ct.food.calorie * ct.serving}cal
                 </div>
                 <div>
-                    <Link to={`/calorietrack/${ct.fid}`}><i class="bi bi-arrow-up-circle-fill"></i></Link>
+                    <Link to={`/calorietrack/edit/${ct.cid}`}><i class="bi bi-arrow-up-circle-fill"></i></Link>
                 </div>
                 <div>
-                    <Link to="#"><i class="bi bi-x-circle-fill"></i></Link>
+                    <Link to={`/calorietrack/delete/${ct.cid}`}><i class="bi bi-x-circle-fill"></i></Link>
                 </div>
             </div>
             <hr/>
