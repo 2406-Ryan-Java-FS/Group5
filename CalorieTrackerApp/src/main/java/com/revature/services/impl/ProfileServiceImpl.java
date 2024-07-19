@@ -73,6 +73,15 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    public ProfileDTO getProfileByUserId(Integer uId) {
+        // Check if profile exists in the DB using the user's id, otherwise return an exception.
+        Profile profileEntity = profileRepo.findByUser_uId(uId)
+                .orElseThrow(() -> new UserProfileDoesNotExistException("Profile not found for user with id: " + uId));
+
+        return convertProfileEntityToProfileDTO(profileEntity);
+    }
+
+    @Override
     public ProfileDTO updateProfile(Integer uId, Integer pId, ProfileDTO profileDTO) {
 
         // Check if the profile to be updated exists in the DB.
@@ -109,14 +118,7 @@ public class ProfileServiceImpl implements ProfileService {
 //        profileRepo.delete(profileEntity);
     }
 
-//    @Override
-//    public ProfileDTO getProfileByUserId(int uId) {
-//        // Check if profile exists in the DB using the user's id, otherwise return an exception.
-//        ProfileEntity profileEntity = profileRepo.findByUserId(uId)
-//                .orElseThrow(() -> new UserProfileDoesNotExistException("Profile not found for user with id: " + uId));
-//
-//        return convertProfileEntityToProfileDTO(profileEntity);
-//    }
+
 
 
     // Utility methods for our implementation class

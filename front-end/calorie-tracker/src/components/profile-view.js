@@ -27,6 +27,7 @@ export default function ProfileView() {
             <p><strong>Weight:</strong> {user.weight || 'N/A'} kg</p>
             <p><strong>Height:</strong> {user.height || 'N/A'} cm</p>
             <p><strong>Activity Level:</strong> {user.activityLevel || 'N/A'}</p>
+            <p><strong>Calorie Goal (per day):</strong> {user.calorieGoal || 'N/A'}</p>
             {/* Add more fields as needed */}
             <Link to="/profile/form">
                 <button>Edit Profile</button>

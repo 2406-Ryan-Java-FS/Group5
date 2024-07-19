@@ -10,7 +10,7 @@ import ProfileView from "./components/profile-view";
 import ProfileForm from "./components/profile-form";
 import { AuthProvider } from "./AuthContext";
 import Error from "./components/Error";
-
+import BmiCalculator from "./components/bmi-calculator";
 
 function App() {
   return (<>
@@ -34,10 +34,12 @@ function App() {
         <Route path="/calorietrack/edit/:cId" element={<CalorieTrackForm/>}/>
 
 
-        <Route path="*" element={<Error />} />
+    <Route path="*" element={<Error />} />
+    <Route path="bmi-calculator" element={<BmiCalculator />} />
 
-      </Routes>
-  </AuthProvider>
+  </Routes>
+
+</AuthProvider>
  
   </>);
 
