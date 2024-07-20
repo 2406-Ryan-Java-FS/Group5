@@ -42,12 +42,12 @@ public class ProfileServiceImpl implements ProfileService {
         validateProfileDetails(profileDTO);
 
         // Check if a profile by this user already exists in the DB.
-//        if (profileRepo.findByUser_UId(uId).isPresent()){
-//            throw new UserProfileAlreadyExistsException("A profile for this user already exists.");
-//        }
-//        if (profileRepo.findById(pId).isPresent()){
-//            throw new UserProfileAlreadyExistsException("A profile for this user already exists.");
-//        }
+        if (profileRepo.findByUser_uId(uId).isPresent()){
+            throw new UserProfileAlreadyExistsException("A profile for this user already exists.");
+        }
+        if (profileRepo.findById(profileDTO.getPId()).isPresent()){
+            throw new UserProfileAlreadyExistsException("A profile for this user already exists.");
+        }
         // Takes in the request body(profile details) and converts it to profileEntity to be stored in DB.
         Profile profileEntity = convertProfileDTOProfileEntity(profileDTO);
 

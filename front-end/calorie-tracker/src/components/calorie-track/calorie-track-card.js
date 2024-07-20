@@ -7,14 +7,13 @@ import CalorieTrackDelete from "./calorie-track-delete";
 export default function CalorieTrackCard({date}){
     //Add authcontext instead!!
     const { user } = useAuth();
-    const uId = 1;
     const formattedDate = format(date, 'yyyy-MM-dd');
 
     const [ctListforADay, setCtListForADay] = useState();
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/calorietrack/user/${uId}/date?logDate=${formattedDate}`)
+        fetch(`http://localhost:8080/api/calorietrack/user/${user.uid}/date?logDate=${formattedDate}`)
         .then(res => {
             const body = res.json();
             console.log(body);
@@ -23,7 +22,7 @@ export default function CalorieTrackCard({date}){
         .catch(error => {
             navigate("/calorietrack")
         })
-    },[formattedDate, navigate, uId]);
+    },[formattedDate, navigate, user.uid]);
 
     return (
         <>

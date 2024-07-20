@@ -1,30 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../AuthContext";
 import CalorieTrackForm2 from "./calorie-track-form2";
 
 export default function CalorieTrackForm(){
-    const {user} = useAuth();
-    const uid = 1;
-    const DEFAULT_CALORIE_TRACK={
-        "serving": "",
-        "logDate": "",
-        "food": {
-            "foodName": "",
-            "calorie": "",
-            "fid": 0
-        },
-        "uid": {uid},
-        "cid": 0
-    };
 
-    const[calorieTrack, setCalorieTrack] = useState(DEFAULT_CALORIE_TRACK);
     const[foodList, setFoodList] = useState([]);
     const [searchInput, setSearchInput] = useState("");
-
-    const navigate = useNavigate();
     
-
     //Populate food search results
     function handleSearch(event){
         event.preventDefault();

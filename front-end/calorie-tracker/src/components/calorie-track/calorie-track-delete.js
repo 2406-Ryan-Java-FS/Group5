@@ -1,11 +1,7 @@
-import { useContext, useEffect, useState } from "react";
-import { useLocation, useParams, useNavigate, Link } from "react-router-dom"
-import { useAuth } from "../../AuthContext";
+import { useEffect, useState } from "react";
+import {  useParams, useNavigate, Link } from "react-router-dom"
 
 export default function CalorieTrackDelete(){
-    const { user } = useAuth();
-
-    const location = useLocation();
     const [calorieTrack, setCalorieTrack] = useState(null);
     const[success, setSuccess] = useState(false);
     const {cId} = useParams();

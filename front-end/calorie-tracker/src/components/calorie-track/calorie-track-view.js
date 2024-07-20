@@ -1,25 +1,34 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { format, addDays, addWeeks, subWeeks, startOfWeek, endOfWeek } from "date-fns";
+import { format, addDays, addWeeks, subWeeks, startOfWeek } from "date-fns";
 import CalorieTrackCard from "./calorie-track-card";
 import { useAuth } from "../../AuthContext";
-import CalorieTrackDelete from "./calorie-track-delete";
 import CalorieTotalCount from "./calorie-total-count";
-import CalorieGoalTitle from "./calorie-goal-title";
+import CalorieRemainCount from "./calorie-remain-count";
 
 export default function CalorieTrackView(){
 
     const { user } = useAuth();
-    const uId = 1;
-    if(user){
-
-    }
-
-    // useEffect(() => {
-    //     if(user){
-    //         fetch(`http://localhost:8080/users/${uId}/profiles`)
-    //     }
-    // }, [])
+    const navigate = useNavigate();
+    const [profile, setProfile] = useState();
+    useEffect(() => {
+        if(user){
+            fetch(`http://localhost:8080/api/users/${user.uid}/profiles`)
+            .then((res) => {
+                const body = res.json();
+                console.log(body);
+                return body;
+            })
+            .then(setProfile)
+            .catch(error => {
+                //navigate to profile page so that the user can enter the profile.
+                // navigate("/profile")
+                console.error(error)
+            })
+        }else{
+            navigate("/")
+        }
+    }, [])
     const [currentDate, setCurrentDate] = useState(new Date());
 
     const startOfWeekDate = startOfWeek(currentDate, { weekStartsOn: 0 }); // Week starts on Sunday
@@ -42,7 +51,8 @@ export default function CalorieTrackView(){
 
     return (
         <div>
-             <h1>My Daily Calorie Goal: </h1>
+             {profile?(<h1>My Daily Calorie Goal: {profile.calorieGoal}</h1>):(<Link to={"/profile"}>Set Calorie your daily Goal!</Link>)}
+             {/* <h1>My Daily Calorie Goal: {profile? profile.calorieGoal:0}</h1> */}
             {/* <CalorieGoalTitle /> */}
             <div className="addCalorieBtnBox d-flex justify-content-end">
             <Link type="button" className="btn btn-primary" to={'/calorietrack/add'} id='addCalorieTrackBtn'>+</Link>
@@ -78,6 +88,14 @@ export default function CalorieTrackView(){
                             <div>Calorie</div> intake</th>
                         {dates.map((date) => (
                             <CalorieTotalCount date={date}/>
+                        ))}
+                    </tr>
+                    <tr>
+                        <th>Calorie Goal -
+                            <div>Total Calorie</div>
+                        </th>
+                        {dates.map((date) => (
+                            <CalorieRemainCount date={date} calorieGoal={profile?profile.calorieGoal:0}/>
                         ))}
                     </tr>
                 </tbody>

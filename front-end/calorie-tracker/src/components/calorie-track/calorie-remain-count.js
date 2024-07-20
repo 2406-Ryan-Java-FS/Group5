@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {format} from 'date-fns';
 import { useAuth } from "../../AuthContext";
 
-export default function CalorieTotalCount({date}){
+export default function CalorieRemainCount({date, calorieGoal}){
     const { user } = useAuth();
     const formattedDate = format(date, 'yyyy-MM-dd');
 
@@ -38,7 +38,7 @@ export default function CalorieTotalCount({date}){
     return(
         <>
             <td>
-                {totalCalorieCount} calories
+                {calorieGoal==0? 0: (calorieGoal - totalCalorieCount)} calories
             </td>
         </>
     )

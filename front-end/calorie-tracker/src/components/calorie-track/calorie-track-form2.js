@@ -5,7 +5,6 @@ import {useAuth} from "../../AuthContext"
 
 export default function CalorieTrackForm2({foodList}){
     const {user} = useAuth();
-    const uid = 1;
 
      //TODO: getting today's date and put it as a placeholder!!!!!
      const today = new Date();
@@ -22,7 +21,7 @@ export default function CalorieTrackForm2({foodList}){
             calorie: "",
             fid: 0
         },
-        uid: uid,
+        uid: user.uid,
         cid: 0
     }
 
@@ -169,6 +168,7 @@ export default function CalorieTrackForm2({foodList}){
                         placeholder="0.0"
                         id="serving"
                         value={calorieTrack.serving}
+                        step="any"
                         onChange={handleChange}/>
             </div>
             <div>
