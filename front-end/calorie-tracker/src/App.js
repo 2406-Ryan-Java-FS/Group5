@@ -12,12 +12,21 @@ import { AuthProvider } from "./AuthContext";
 import Error from "./components/Error";
 import CalorieTrackDelete from "./components/calorie-track/calorie-track-delete";
 import BmiCalculator from "./components/bmi-calculator";
+import { useLocation } from "react-router-dom";
 
 function App() {
+
+  const location = useLocation();
+
+  const showNavBar = () =>{
+    const noNavbarPaths = ['/', '/login', '/signup'];
+    return !noNavbarPaths.includes(location.pathname);
+  };
+
   return (<>
 
 <AuthProvider>
-    <NavBar />
+    <NavBar show={showNavBar()} />
       <Routes>
         <Route path='' element={<Home />} />
 

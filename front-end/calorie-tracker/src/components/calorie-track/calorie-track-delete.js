@@ -27,7 +27,7 @@ export default function CalorieTrackDelete(){
             navigate("/calorietrack");
           })
       }
-    },[])
+    }, [])
 
     function handleDelete(){
       const config = {
