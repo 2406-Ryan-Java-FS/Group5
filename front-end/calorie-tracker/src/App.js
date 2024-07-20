@@ -37,6 +37,7 @@ function App() {
         <Route path="profile" element={<ProfileView />} />
 
         <Route path="profile/form" element={<ProfileForm />} />
+        <Route path="profile/form/edit/:pId" element={<ProfileForm />}/>
 
     {/* Calorie-track-dashboard */}
     <Route path="/calorietrack" element={<CalorieTrackView/>}/>

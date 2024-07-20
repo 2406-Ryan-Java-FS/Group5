@@ -15,7 +15,7 @@ export default function CalorieTotalCount({date}){
             fetch(`http://localhost:8080/api/calorietrack/user/${user.uid}/date?logDate=${formattedDate}`)
         .then(res => {
             const body = res.json();
-            console.log(body);
+            // console.log(body);
             return body})
         .then(setCtListForADay)
         .catch(error => {
@@ -37,8 +37,8 @@ export default function CalorieTotalCount({date}){
 
     return(
         <>
-            <td>
-                {totalCalorieCount} calories
+            <td className="text-center">
+               <b>{totalCalorieCount.toFixed(1)}</b> cals
             </td>
         </>
     )

@@ -26,9 +26,9 @@ export default function CalorieTrackView(){
                 console.error(error)
             })
         }else{
-            navigate("/")
+            navigate("/error")
         }
-    }, [])
+    }, [user])
     const [currentDate, setCurrentDate] = useState(new Date());
 
     const startOfWeekDate = startOfWeek(currentDate, { weekStartsOn: 0 }); // Week starts on Sunday
@@ -46,8 +46,12 @@ export default function CalorieTrackView(){
     const handleNextWeek = () => {
         setCurrentDate((prevDate) => addWeeks(prevDate, 1));
     };
-
     
+    if(!user){
+        return(<div>
+            <Link type="login" to="/login">Log in and start to log your calories!</Link>
+        </div>)
+    }
 
     return (
         <div>
@@ -65,7 +69,7 @@ export default function CalorieTrackView(){
             <table className="table table-border" >
                 <thead>
                     <tr>
-                        <th>Date</th>
+                        <th className="text-center">Date</th>
                         {dates.map((date, index) => (
                             <th key={index}>
                                  <div className="text-center">{format(date, "yyyy-MM-dd")}</div>
@@ -77,21 +81,21 @@ export default function CalorieTrackView(){
                 </thead>
                 <tbody>
                     <tr>
-                        <th>Logs</th>
+                        <th className="text-center">Logs</th>
                         {dates.map((date)=>(
                              <CalorieTrackCard date={date}/>
                         ))}
                       
                     </tr>
                     <tr>
-                        <th>Total 
+                        <th className="text-center">Total 
                             <div>Calorie</div> intake</th>
                         {dates.map((date) => (
                             <CalorieTotalCount date={date}/>
                         ))}
                     </tr>
                     <tr>
-                        <th>Calorie Goal -
+                        <th className="text-center">Calorie Goal -
                             <div>Total Calorie</div>
                         </th>
                         {dates.map((date) => (

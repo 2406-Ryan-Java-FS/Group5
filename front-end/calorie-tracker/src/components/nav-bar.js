@@ -16,7 +16,7 @@ export default function NavBar({show}){
     return (<>
         <div>
         <nav id="navbar">
-            <Link to="/profile/form">Profile</Link>
+            <Link to="/profile">Profile</Link>
             <Link to="/calorietrack">CalorieTrack</Link>
             <Link to="/bmi-calculator">BMI Calculator</Link>
             <Link to="/" onClick={logout}>Log Out</Link>

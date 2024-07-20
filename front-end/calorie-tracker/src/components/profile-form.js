@@ -98,173 +98,9 @@
 // }
 
 
-
-
-
-
-
-
-
-
-
-// import React, { useState, useEffect } from 'react';
-// import { useAuth } from '../AuthContext';
-// import { useNavigate } from 'react-router-dom';
-
-// export default function ProfileForm() {
-//     const { user, login } = useAuth();
-//     const navigate = useNavigate();
-//     const [formData, setFormData] = useState({
-//         gender: '',
-//         weight: '',
-//         height: '',
-//         activity: '',
-//         calorieGoal: '',
-//     });
-    
-//     const [isLoading, setIsLoading] = useState(true);
-
-//     useEffect(() => {
-//         if (!user) {
-//             navigate('/login');
-//         } else {
-//             // Fetch existing profile data
-//             fetchProfileData();
-//         }
-//     }, [user, navigate]);
-
-//     const fetchProfileData = async () => {
-//         try {
-//             const response = await fetch(`http://localhost:8080/api/users/${user.uid}/profiles`);
-//             if (response.ok) {
-//                 const profileData = await response.json();
-//                 setFormData({
-//                     gender: profileData.gender,
-//                     weight: profileData.weight,
-//                     height: profileData.height,
-//                     activity: profileData.activity,
-//                     calorieGoal: profileData.calorieGoal,
-//                 });
-//             } else {
-//                 console.error('Failed to fetch profile:', response.status);
-//             }
-//         } catch (error) {
-//             console.error('Error fetching profile:', error);
-//         } finally {
-//             setIsLoading(false);
-//         }
-//     };
-
-//     const handleChange = (e) => {
-//         const { name, value } = e.target;
-//         setFormData({
-//             ...formData,
-//             [name]: value,
-//         });
-//     };
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-
-//         const profileData = {
-//             ...formData,
-//             weight: parseFloat(formData.weight),
-//             height: parseFloat(formData.height),
-//             activity: parseInt(formData.activity, 10),
-//             calorieGoal: parseInt(formData.calorieGoal, 10),
-//         };
-
-//         console.log('Submitting profile data:', profileData);
-
-//         try {
-//             const response = await fetch(`http://localhost:8080/api/users/${user.uid}/profiles`, {
-//                 method: profileData.pid ? 'PUT':'POST', // Use PUT if profileId exists, otherwise POST
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                 },
-//                 body: JSON.stringify(profileData),
-//             });
-
-//             if (response.ok) {
-//                 const updatedUser = { ...user, ...profileData };
-//                 login(updatedUser);
-//                 navigate('/profile');
-//             } else {
-//                 const errorText = await response.text();
-//                 console.error('Failed to update profile:', errorText);
-//             }
-//         } catch (error) {
-//             console.error('Error:', error);
-//         }
-//     };
-
-//     if (isLoading) {
-//         return <div>Loading...</div>;
-//     }
-
-//     return (
-//         <div className="profile-form">
-//             <h2>Edit Profile</h2>
-//             <form onSubmit={handleSubmit}>
-//                 <label>
-//                     Gender:
-//                     <select
-//                         name="gender"
-//                         value={formData.gender}
-//                         onChange={handleChange}
-//                     >
-//                         <option value="">Select</option>
-//                         <option value="male">Male</option>
-//                         <option value="female">Female</option>
-//                         <option value="other">Other</option>
-//                     </select>
-//                 </label>
-//                 <label>
-//                     Weight (kg):
-//                     <input
-//                         type="number"
-//                         name="weight"
-//                         value={formData.weight}
-//                         onChange={handleChange}
-//                     />
-//                 </label>
-//                 <label>
-//                     Height (cm):
-//                     <input
-//                         type="number"
-//                         name="height"
-//                         value={formData.height}
-//                         onChange={handleChange}
-//                     />
-//                 </label>
-//                 <label>
-//                     Activity Level:
-//                     <select name="activity" value={formData.activity} onChange={handleChange}>
-//                         <option value="">Select</option>
-//                         <option value="1">1-2 times a week</option>
-//                         <option value="2">3-4 times a week</option>
-//                         <option value="3">5-6 times a week</option>
-//                         <option value="4">7+ times a week</option>
-//                     </select>
-//                 </label>
-//                 <label>
-//                     Calorie Goal (per day):
-//                     <input
-//                         type="number"
-//                         name="calorieGoal"
-//                         value={formData.calorieGoal}
-//                         onChange={handleChange}
-//                     />
-//                 </label>
-//                 <button type="submit">Save Profile</button>
-//             </form>
-//         </div>
-//     );
-// }
-
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function ProfileForm() {
     const { user, login } = useAuth();
@@ -278,6 +114,7 @@ export default function ProfileForm() {
     });
     const [isLoading, setIsLoading] = useState(true);
     const [profileExists, setProfileExists] = useState(false); // Track if a profile exists
+    const [profile, setProfile] = useState([]);
 
     useEffect(() => {
         if (!user) {
@@ -294,12 +131,15 @@ export default function ProfileForm() {
             if (response.ok) {
                 const profileData = await response.json();
                 setFormData({
+                    pid: profileData.pid,
                     gender: profileData.gender,
                     weight: profileData.weight,
                     height: profileData.height,
                     activity: profileData.activity,
                     calorieGoal: profileData.calorieGoal,
                 });
+                console.log("fetched profileData: " +profileData)
+                setProfile(profileData)
                 setProfileExists(true); // Set profile exists to true if data is fetched successfully
             } else {
                 console.error('Failed to fetch profile:', response.status);
@@ -335,7 +175,7 @@ export default function ProfileForm() {
         console.log('Submitting profile data:', profileData);
 
         try {
-            const response = await fetch(`http://localhost:8080/api/users/${user.uid}/profiles`, {
+            const response = await fetch(profileExists?(`http://localhost:8080/api/users/${user.uid}/profiles/${profileData.pid}`):(`http://localhost:8080/api/users/${user.uid}/profiles`), {
                 method: profileExists ? 'PUT' : 'POST', // Use PUT if profile exists, otherwise POST
                 headers: {
                     'Content-Type': 'application/json',
@@ -393,6 +233,7 @@ export default function ProfileForm() {
                         name="height"
                         value={formData.height}
                         onChange={handleChange}
+                    
                     />
                 </label>
                 <label>

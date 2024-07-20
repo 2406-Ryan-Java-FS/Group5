@@ -32,9 +32,6 @@ export default function CalorieTrackForm2({foodList}){
     const navigate = useNavigate();
     const {cId} = useParams();
 
-    if(cId){
-        console.log("cId: " + cId)
-    }
 
     useEffect(() => {
         if(cId){
@@ -141,7 +138,7 @@ export default function CalorieTrackForm2({foodList}){
                 uId
                 <input type="number" name="uid" id="uid" 
                 value={calorieTrack.uid} 
-                onChange={handleChange}/>
+                onChange={handleChange} hidden/>
             </div>
             <div>
                 <label htmlFor="food">Food</label>

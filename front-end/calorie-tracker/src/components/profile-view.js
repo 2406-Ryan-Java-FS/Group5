@@ -53,8 +53,10 @@ export default function ProfileView() {
 
         try {
             const response = await fetch(`http://localhost:8080/api/users/${user.uid}/profiles`);
+        
             if (response.ok) {
                 const profileData = await response.json();
+                console.log(profileData);
                 setProfile(profileData);
             } else {
                 console.error('Failed to fetch profile', response.status);
@@ -95,9 +97,11 @@ export default function ProfileView() {
             <p><strong>Height:</strong> {profile?.height || 'N/A'} cm</p>
             <p><strong>Activity Level:</strong> {profile?.activity || 'N/A'}</p>
             <p><strong>Calorie Goal (per day):</strong> {profile?.calorieGoal || 'N/A'}</p>
-            <Link to="/profile/form">
+            {profile && profile.pid?(<Link to={`/profile/form/edit/${profile.pid}`}>
                 <button>Edit Profile</button>
-            </Link>
+            </Link>) : (<Link to="/profile/form">
+                <button>Make Profile</button>
+            </Link>)}
         </div>
     );
 }

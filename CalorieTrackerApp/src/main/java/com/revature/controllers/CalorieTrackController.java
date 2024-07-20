@@ -69,14 +69,10 @@ public class CalorieTrackController {
     @PostMapping
     public ResponseEntity<?> createCalorieTrack(@RequestBody CalorieTrackDTO calorieTrackDTO){
         // Get the Result of CalorieTrack
-        System.out.println("Post controller");
-        System.out.println("CalorieTrackDTO: " + calorieTrackDTO);
-        System.out.println(calorieTrackDTO.toString());
         Result<CalorieTrackDTO> result = calorieTrackService.createCalorieTrack(calorieTrackDTO);
         System.out.println(result);
         //If creation went successful, it will return payload of result which has a CalorieTrackDTO object.
         if(result.isSuccess()){
-            System.out.println("post succedd");
             return new ResponseEntity<>(result.getPayload(),HttpStatus.CREATED);
         }
         //Else return BAD_REQUEST
