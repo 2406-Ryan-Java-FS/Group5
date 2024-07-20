@@ -54,19 +54,18 @@ export default function CalorieTrackView(){
     }
 
     return (
-        <div>
-             {profile?(<h1>My Daily Calorie Goal: {profile.calorieGoal}</h1>):(<Link to={"/profile"}>Set Calorie your daily Goal!</Link>)}
-             {/* <h1>My Daily Calorie Goal: {profile? profile.calorieGoal:0}</h1> */}
-            {/* <CalorieGoalTitle /> */}
+        <div className="container mt-3" >
+             {profile?(<h1>My Daily Calorie Goal: {profile.calorieGoal}</h1>):(<Link to={"/profile"} className="text-center"><span className="setCalorieLink">Set Calorie your daily Goal!</span></Link>)}
+           
             <div className="addCalorieBtnBox d-flex justify-content-end">
-            <Link type="button" className="btn btn-primary" to={'/calorietrack/add'} id='addCalorieTrackBtn'>+</Link>
+            <Link type="button" className="btn btn-primary mt-3" to={'/calorietrack/add'} id='addCalorieTrackBtn'>+</Link>
             </div>
             
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between mt-2">
                 <button onClick={handlePreviousWeek}>Previous Week</button>
                 <button onClick={handleNextWeek}>Next Week</button>
             </div>
-            <table className="table table-border" >
+            <table className="table table-border mt-2" >
                 <thead>
                     <tr>
                         <th className="text-center">Date</th>

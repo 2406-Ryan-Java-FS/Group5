@@ -7,6 +7,12 @@
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+h2{
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+
+}
 
 form {
     display: flex;
@@ -15,9 +21,11 @@ form {
 
 label {
     margin-bottom: 10px;
+    font-weight: bold;
 }
 
 input {
+    margin-left: 20px;
     padding: 8px;
     font-size: 1rem;
     border: 1px solid #ccc;
@@ -29,7 +37,7 @@ button {
     padding: 10px 20px;
     font-size: 1rem;
     cursor: pointer;
-    background-color: #007BFF;
+    background-color: #28a745;
     color: white;
     border: none;
     border-radius: 5px;
@@ -37,5 +45,5 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #218838;
 }

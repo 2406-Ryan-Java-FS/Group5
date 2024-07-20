@@ -65,7 +65,7 @@ export default function CalorieTrackDelete(){
     }
     return (
       <div className="container col-lg-6 col-sm-8  pb-4 rounded-2" id="reviewDeleteBox">
-              {success && (
+          {success && (
           <div className='alert alert-success' role='alert'>
             <p>
               Successfully deleted review! Navigating back to

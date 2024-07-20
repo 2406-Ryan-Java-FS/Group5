@@ -19,7 +19,7 @@ function App() {
   const location = useLocation();
 
   const showNavBar = () =>{
-    const noNavbarPaths = ['/', '/login', '/signup'];
+    const noNavbarPaths = ['/', '/login', '/signup', '/error'];
     return !noNavbarPaths.includes(location.pathname);
   };
 

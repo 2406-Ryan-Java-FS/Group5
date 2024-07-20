@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/login.css';
 import { useAuth } from '../AuthContext';
+import toast, {Toaster} from 'react-hot-toast';
+
 
 export default function LoginPage() {
     const [username, setUsername] = useState('');
@@ -25,19 +27,24 @@ export default function LoginPage() {
                 const userData = await response.json();
                 console.log('Login successful', userData);
                 login(userData);
-                // Handle successful login, e.g., store user data, redirect to profile
-                navigate('/profile');
+                toast.success("Login Successful! :)")
+                navigate('/profile')
+               
             } else {
                 const errorData = await response.json();
                 console.error('Login failed:', errorData);
+                toast.error("Login Failed")
             }
         } catch (error) {
             console.error('Login error:', error);
+            navigate('/')
         }
     };
 
     return (
         <div className="login-container">
+            <Toaster
+                position = "top-center"/>
             <h2>Login</h2>
             <form onSubmit={handleLogin}>
                 <label>
@@ -60,7 +67,7 @@ export default function LoginPage() {
                 </label>
                 <button type="submit">Login</button>
             </form>
-            <p>
+            <p className='mt-2'>
                 Don't have an account? <Link to="/signup">Sign Up</Link>
             </p>
         </div>
