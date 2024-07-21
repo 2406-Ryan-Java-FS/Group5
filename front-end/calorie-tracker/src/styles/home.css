@@ -15,7 +15,7 @@ body, html {
 }
 
 button {
-    background-color: #007bff; /* Bootstrap primary color */
+    background-color:#28a745; /* Bootstrap primary color */
     border: none;
     color: white;
     padding: 15px 30px;
@@ -30,7 +30,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #218838;
     transform: scale(1.05);
 }
 h1 {
@@ -39,6 +39,8 @@ h1 {
     text-align: center; 
     margin-bottom: 20px; 
     color: #333; 
+    font-weight: 700;
+    font-style: italic;
 }
 
 .food-image {

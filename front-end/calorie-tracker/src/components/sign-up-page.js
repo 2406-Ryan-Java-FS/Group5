@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/signup.css';
+import toast, {Toaster} from 'react-hot-toast';
 
 export default function SignUpPage() {
     const [username, setUsername] = useState('');
@@ -23,18 +24,23 @@ export default function SignUpPage() {
             if (response.ok) {
                 console.log('Signup successful');
                 console.log(username, password, role)
+                toast.success("Signup Successful! :)")
                 navigate('/login'); // Redirect after successful signup
             } else {
                 const errorData = await response.json();
                 console.error('Signup failed:', errorData);
+                toast.error(errorData.message)
             }
         } catch (error) {
             console.error('Signup error:', error);
+            navigate("/")
         }
     };
 
     return (
         <div className="signup-container">
+             <Toaster
+                position = "top-center"/>
             <h2>Sign Up</h2>
             <form onSubmit={handleSignup}>
                 <label>

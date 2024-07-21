@@ -18,6 +18,7 @@ export default function CalorieTrackForm(){
             })
                .then(info => {
                 setFoodList(info)
+                setSearchInput("");
             })
             .catch(error => {
                 console.log(error)
@@ -28,17 +29,19 @@ export default function CalorieTrackForm(){
     function handleChange(event){
         console.log("target"+ event.target.value)
         setSearchInput(event.target.value);
-       }
+
+        
+    }
 
     return(
-        <div>
-            <h3>Search Your Food</h3>
+        <div className="container calorie-track-form">
+            <h3 className="mt-2">Search Your Food</h3>
             {/* form for searching food */}
             <form className="doSerachFood" onSubmit={handleSearch}>
                 <div className="col mb-2">
                     <input type="text" className="form-control" onChange={handleChange} value={searchInput}id="searchBox"/>
                 </div>
-                <div className="col">
+                <div className="col d-flex justify-content-end">
                     <button className="btn btn-outline btn-primary" type = 'submit'>Search</button>
                 </div>
             </form>

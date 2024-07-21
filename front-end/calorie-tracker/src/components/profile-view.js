@@ -40,6 +40,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
+import '../styles/profile.css';
 
 export default function ProfileView() {
     const { user } = useAuth();

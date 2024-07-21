@@ -101,6 +101,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../AuthContext';
 import { useNavigate, useParams } from 'react-router-dom';
+import '../styles/profile.css';
+import toast, {Toaster} from 'react-hot-toast';
 
 export default function ProfileForm() {
     const { user, login } = useAuth();
@@ -114,7 +116,6 @@ export default function ProfileForm() {
     });
     const [isLoading, setIsLoading] = useState(true);
     const [profileExists, setProfileExists] = useState(false); // Track if a profile exists
-    const [profile, setProfile] = useState([]);
 
     useEffect(() => {
         if (!user) {
@@ -139,7 +140,6 @@ export default function ProfileForm() {
                     calorieGoal: profileData.calorieGoal,
                 });
                 console.log("fetched profileData: " +profileData)
-                setProfile(profileData)
                 setProfileExists(true); // Set profile exists to true if data is fetched successfully
             } else {
                 console.error('Failed to fetch profile:', response.status);
@@ -186,10 +186,12 @@ export default function ProfileForm() {
             if (response.ok) {
                 const updatedUser = { ...user, ...profileData };
                 login(updatedUser);
+                toast.success("Success!")
                 navigate('/profile');
             } else {
                 const errorText = await response.text();
                 console.error('Failed to update profile:', errorText);
+                toast.error(errorText)
             }
         } catch (error) {
             console.error('Error:', error);
@@ -202,7 +204,7 @@ export default function ProfileForm() {
 
     return (
         <div className="profile-form">
-            <h2>Edit Profile</h2>
+            <h2>{profileExists? "Edit" : "Add a "} Profile</h2>
             <form onSubmit={handleSubmit}>
                 <label>
                     Gender:
@@ -218,15 +220,6 @@ export default function ProfileForm() {
                     </select>
                 </label>
                 <label>
-                    Weight (kg):
-                    <input
-                        type="number"
-                        name="weight"
-                        value={formData.weight}
-                        onChange={handleChange}
-                    />
-                </label>
-                <label>
                     Height (cm):
                     <input
                         type="number"
@@ -234,6 +227,15 @@ export default function ProfileForm() {
                         value={formData.height}
                         onChange={handleChange}
                     
+                    />
+                </label>
+                <label>
+                    Weight (kg):
+                    <input
+                        type="number"
+                        name="weight"
+                        value={formData.weight}
+                        onChange={handleChange}
                     />
                 </label>
                 <label>

@@ -1,0 +1,17 @@
+.profile-container, .profile-container-empty, .profile-form{
+    margin: 30px;
+    padding: 20px;
+    background-color: #faf7f7e2;
+    box-shadow: 10px 5px 5px #ddd;
+    border-radius: 5px;
+    /* border: 1px solid black; */
+
+}
+
+.profile-container, .profile-container-empty{
+    text-align: center;
+}
+
+input, select{
+    margin-left: 20px;
+}
