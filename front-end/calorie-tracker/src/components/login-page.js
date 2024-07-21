@@ -28,7 +28,12 @@ export default function LoginPage() {
                 console.log('Login successful', userData);
                 toast.success("Login Successful! :)")
                 login(userData);
-                navigate('/profile')
+
+                if (userData.role === 'ADMIN') {
+                    navigate('/admin');
+                } else {
+                    navigate('/profile');
+                }
                
             } else {
                 const errorData = await response.json();

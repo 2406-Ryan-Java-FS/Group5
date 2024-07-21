@@ -1,23 +1,30 @@
 import { Link, NavLink } from 'react-router-dom';
 import '../styles/nav.css';
 import { useAuth } from '../AuthContext';
+import AdminNavbar from './admin-navbar';
 
 
 
 export default function NavBar({show}){
-    const { logout, user } = useAuth();
-
-
+  const { logout, user } = useAuth();
 
     if (!show)
         return null;
     //function for log out 
+    const handleLogout = () => {
+      logout();
+  };
+
 
 
     return (<>
     <header>
       <nav className="navbar navbar-expand-lg navbar-light mt-2 mb-2 ps-4 pe-4">
-        <NavLink className="navbar-brand" to="/calorietrack">
+        {user && user.role === 'ADMIN' ? (
+          <AdminNavbar /> // Show AdminNavbar if user is an admin
+        ) : (
+          <>
+            <NavLink className="navbar-brand" to="/calorietrack">
           <img src='/Group 1 (1).png' alt='Calorie Track Pro Logo' width='80' />
         </NavLink>
         <button
@@ -73,16 +80,35 @@ export default function NavBar({show}){
             </div>
           )}
         </div>
+          </>
+        )
+
+        }
+        
       </nav>
     </header>
 
         {/* <div>
         <nav id="navbar navbar-expand-lg navbar-light mt-2 mb-2 ps-4 pe-4">
     
+    const handleLogout = () => {
+        logout();
+    };
+
+
+
+    return (<>
+        <div>
+        <nav id="navbar">
+        {user && user.role === 'ADMIN' ? (
+                    <AdminNavbar /> // Show AdminNavbar if user is an admin
+                ) : (<>
             <Link to="/profile">Profile</Link>
             <Link to="/calorietrack">CalorieTrack</Link>
             <Link to="/bmi-calculator">BMI Calculator</Link>
-            <Link to="/" onClick={logout}>Log Out</Link>
+            <Link to="/" onClick={handleLogout}>Log Out</Link>
+            </>
+        )}
         </nav>
         </div> */}
 
