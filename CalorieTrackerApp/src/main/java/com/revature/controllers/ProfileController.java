@@ -89,7 +89,7 @@ public class ProfileController {
     // THIS WILL ONLY BE ACCESSED BY THE ADMIN
     @GetMapping
     public ResponseEntity<ProfileDTO> getProfileByUserId(@PathVariable Integer uId){
-        
+
         UserDTO userDTO = userService.getUserById(uId);
 
         ProfileDTO profileDTO = profileService.getProfileByUserId(uId);

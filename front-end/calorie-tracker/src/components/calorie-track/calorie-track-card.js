@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import {format} from 'date-fns';
 import { useAuth } from "../../AuthContext";
-import CalorieTrackDelete from "./calorie-track-delete";
 
 export default function CalorieTrackCard({date}){
     //Add authcontext instead!!

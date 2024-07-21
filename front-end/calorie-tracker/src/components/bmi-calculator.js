@@ -41,7 +41,7 @@ export default function BmiCalculator() {
     return (
         <div className="bmi-calculator">
             <h2>BMI Calculator</h2>
-            <p><strong>BMI:</strong> calculateBMI()</p>
+            <p><strong>BMI:</strong> {calculateBMI()}</p>
             <BMIChart userBMI = {userBMI} />
             <div className='d-flex justify-content-end'>
              <Link to="/profile/form"><button>Update Profile</button></Link>
