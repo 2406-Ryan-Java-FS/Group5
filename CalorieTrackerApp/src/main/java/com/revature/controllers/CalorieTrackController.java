@@ -42,12 +42,12 @@ public class CalorieTrackController {
         return new ResponseEntity<>(calorieTrackDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/user/{uId}")
+    @GetMapping("/users/{uId}")
     public List<CalorieTrackDTO> getCalorieTrackByUser(@PathVariable int uId){
         return calorieTrackService.getCaloriesByUser(uId);
     }
 
-    @GetMapping("/user/{uId}/date")
+    @GetMapping("/users/{uId}/date")
     public List<CalorieTrackDTO> getCaloriesByUserAndDate(@PathVariable int uId,
                                                           @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate logDate){
         System.out.println("logDate: " + logDate);
@@ -58,7 +58,7 @@ public class CalorieTrackController {
         return calorieTrackDTOS;
     }
 
-    @GetMapping("/user/{uId}/date-between")
+    @GetMapping("/users/{uId}/date-between")
     public List<CalorieTrackDTO> getCaloriesByUserAndDateBetween(@PathVariable int uId,
                                                                  @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate logDateStart,
                                                                  @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate logDateEnd){

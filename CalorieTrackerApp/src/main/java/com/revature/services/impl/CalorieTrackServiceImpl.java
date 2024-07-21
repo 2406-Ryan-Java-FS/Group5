@@ -77,8 +77,11 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
         return calorieTrackDTOS;
     }
 
+    public CalorieTrackServiceImpl() {
+        super();
+    }
 
-    @Override
+        @Override
     public Result<CalorieTrackDTO> createCalorieTrack(CalorieTrackDTO calorieTrackDTO) {
         System.out.println("in service layer");
        Result<CalorieTrackDTO> result = validateCalorieTrack(calorieTrackDTO);
@@ -96,6 +99,7 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
 
 
     }
+
 
     @Override
     public Result<CalorieTrackDTO> updateCalorieTrack(CalorieTrackDTO calorieTrackDTO) {
@@ -173,7 +177,7 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
         User user = userRepository.findById(calorieTrackDTO.getUId()).orElseThrow(() -> new CalorieTrackNotFoundException("user is not found"));
         Food food = foodRepository.findById(calorieTrackDTO.getFId()).orElseThrow(() -> new FoodNotFoundException("food cannot be found"));
         CalorieTrack calorieTrack = new CalorieTrack();
-        calorieTrack.setCId(calorieTrackDTO.getCId()); // Assuming setCId method exists
+        //calorieTrack.setCId(calorieTrackDTO.getCId()); // Assuming setCId method exists
         calorieTrack.setServing(calorieTrackDTO.getServing());
         calorieTrack.setLogDate(calorieTrackDTO.getLogDate());
         calorieTrack.setUser(user);

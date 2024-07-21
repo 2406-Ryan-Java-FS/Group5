@@ -21,5 +21,4 @@ public class CalorieTrackDTO {
     private int uId;
     private int fId;
 
-
 }
