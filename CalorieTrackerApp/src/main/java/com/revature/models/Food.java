@@ -27,6 +27,10 @@ public class Food {
     @Column(name = "calories", nullable = false)
     private int calorie;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "u_id", nullable = false)
+    private User user;
+
 //    @OneToMany(mappedBy="food")
 //    @JsonManagedReference(value = "food")
 //    private List<CalorieTrack> calorieTrackList;

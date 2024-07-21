@@ -13,4 +13,7 @@ public class FoodDTO {
     private int fId;
     private String foodName;
     private int calorie;
+
+    // foreign key
+    private Integer uId;
 }

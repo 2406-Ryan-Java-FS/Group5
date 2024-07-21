@@ -1,10 +1,9 @@
 package com.revature.services.impl;
 
 import com.revature.dto.CalorieTrackDTO;
-import com.revature.dto.FoodDTO;
-import com.revature.dto.UserDTO;
 import com.revature.exceptions.CalorieTrackExceptions.CalorieTrackNotFoundException;
 import com.revature.exceptions.FoodExceptions.FoodNotFoundException;
+import com.revature.exceptions.userexceptions.UserNotFoundException;
 import com.revature.models.CalorieTrack;
 import com.revature.models.Food;
 import com.revature.models.User;
@@ -78,8 +77,11 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
         return calorieTrackDTOS;
     }
 
+    public CalorieTrackServiceImpl() {
+        super();
+    }
 
-    @Override
+        @Override
     public Result<CalorieTrackDTO> createCalorieTrack(CalorieTrackDTO calorieTrackDTO) {
         System.out.println("in service layer");
        Result<CalorieTrackDTO> result = validateCalorieTrack(calorieTrackDTO);
@@ -94,7 +96,10 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
         CalorieTrackDTO returnedCalorieTrackDTO = convertCalorieTrackToCalorieTrackDTO(calorieTrack);
         result.setPayload(returnedCalorieTrackDTO);
         return result;
+
+
     }
+
 
     @Override
     public Result<CalorieTrackDTO> updateCalorieTrack(CalorieTrackDTO calorieTrackDTO) {
@@ -157,7 +162,7 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
             // throw userNotFoundException("UserId is required")
             result.addErrorMessage("UserId is required");
         }
-        if(calorieTrackDTO.getFood().getFId() == 0){
+        if(calorieTrackDTO.getFId() == 0){
             //throw foodNotFound("Food cannot be null")
             result.addErrorMessage("Food cannot be null");
         }
@@ -170,9 +175,9 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
     private CalorieTrack convertCalorieTrackDTOTOCalorieTrack(CalorieTrackDTO calorieTrackDTO){
         // change exception.
         User user = userRepository.findById(calorieTrackDTO.getUId()).orElseThrow(() -> new CalorieTrackNotFoundException("user is not found"));
-        Food food = foodRepository.findById(calorieTrackDTO.getFood().getFId()).orElseThrow(() -> new FoodNotFoundException("food cannot be found"));
+        Food food = foodRepository.findById(calorieTrackDTO.getFId()).orElseThrow(() -> new FoodNotFoundException("food cannot be found"));
         CalorieTrack calorieTrack = new CalorieTrack();
-        calorieTrack.setCId(calorieTrackDTO.getCId()); // Assuming setCId method exists
+        //calorieTrack.setCId(calorieTrackDTO.getCId()); // Assuming setCId method exists
         calorieTrack.setServing(calorieTrackDTO.getServing());
         calorieTrack.setLogDate(calorieTrackDTO.getLogDate());
         calorieTrack.setUser(user);
@@ -191,8 +196,8 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
                 calorieTrack.getCId(),
                 calorieTrack.getServing(),
                 calorieTrack.getLogDate(),
-                convertFoodToFoodDTO(calorieTrack.getFood()),
-                calorieTrack.getUser().getUId()
+                calorieTrack.getUser().getUId(),
+                calorieTrack.getFood().getFId()
         );
 //        return CalorieTrackDTO.builder()
 //                .cId(calorieTrack.getCId())
@@ -201,13 +206,5 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
 //                .uId(calorieTrack.getUser().getUId())
 //                .fId(calorieTrack.getFood().getFId())
 //                .build();
-    }
-
-    private FoodDTO convertFoodToFoodDTO(Food food){
-        return FoodDTO.builder()
-                .fId(food.getFId())
-                .foodName(food.getFoodName())
-                .calorie(food.getCalorie())
-                .build();
     }
 }

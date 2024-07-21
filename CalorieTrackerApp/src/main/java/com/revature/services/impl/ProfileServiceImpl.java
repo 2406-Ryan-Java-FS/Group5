@@ -13,6 +13,10 @@ import com.revature.services.ProfileService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional // ensures that all database operations within the annotated method are executed in a single transaction.
@@ -42,10 +46,10 @@ public class ProfileServiceImpl implements ProfileService {
         validateProfileDetails(profileDTO);
 
         // Check if a profile by this user already exists in the DB.
-        if (profileRepo.findByUser_uId(uId).isPresent()){
-            throw new UserProfileAlreadyExistsException("A profile for this user already exists.");
-        }
-//        if (profileRepo.findById(profileDTO.getPId()).isPresent()){
+       if (profileRepo.findByUser_uId(uId).isPresent()){
+           throw new UserProfileAlreadyExistsException("A profile for this user already exists.");
+       }
+//        if (profileRepo.findById(pId).isPresent()){
 //            throw new UserProfileAlreadyExistsException("A profile for this user already exists.");
 //        }
         // Takes in the request body(profile details) and converts it to profileEntity to be stored in DB.
@@ -73,15 +77,6 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public ProfileDTO getProfileByUserId(Integer uId) {
-        // Check if profile exists in the DB using the user's id, otherwise return an exception.
-        Profile profileEntity = profileRepo.findByUser_uId(uId)
-                .orElseThrow(() -> new UserProfileDoesNotExistException("Profile not found for user with id: " + uId));
-
-        return convertProfileEntityToProfileDTO(profileEntity);
-    }
-
-    @Override
     public ProfileDTO updateProfile(Integer uId, Integer pId, ProfileDTO profileDTO) {
 
         // Check if the profile to be updated exists in the DB.
@@ -104,7 +99,7 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public void deleteProfile(Integer uId, Integer pId) {
+    public void deleteProfile(Integer pId, Integer uId) {
 
         // check if the profile exists in the DB using its ID. If it doesn't exist then throw the UserProfileDoesNotExistException.
         if (!profileRepo.existsById(pId)) {
@@ -118,8 +113,28 @@ public class ProfileServiceImpl implements ProfileService {
 //        profileRepo.delete(profileEntity);
     }
 
+    // ACCESSED BY THE ADMIN ONLY
+    @Override
+    public ProfileDTO getProfileByUserId(Integer uId) {
+        // Check if profile exists in the DB using the user's id, otherwise return an exception.
+        Profile profileEntity = profileRepo.findByUser_uId(uId)
+                .orElseThrow(() -> new UserProfileDoesNotExistException("Profile not found for user with id: " + uId));
 
+        return convertProfileEntityToProfileDTO(profileEntity);
+    }
 
+    @Override
+    public List<ProfileDTO> getAllProfiles(@PathVariable Integer uId) {
+        List<Profile> allProfilesEntity = profileRepo.findAll();
+        List<ProfileDTO> allProfilesDTO = new ArrayList<>();
+
+        for(Profile profileEntity: allProfilesEntity){
+            ProfileDTO profileDTO = convertProfileEntityToProfileDTO(profileEntity);
+            allProfilesDTO.add(profileDTO);
+        }
+
+        return allProfilesDTO;
+    }
 
     // Utility methods for our implementation class
     private Profile convertProfileDTOProfileEntity(ProfileDTO profileDTO){

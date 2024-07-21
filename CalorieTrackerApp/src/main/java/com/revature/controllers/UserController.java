@@ -56,9 +56,13 @@ public class UserController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<List<UserDTO>> getAllUsers(){
+    @GetMapping("/{uId}/all")
+    public ResponseEntity<List<UserDTO>> getAllUsers(@PathVariable Integer uId){
+         UserDTO user = userService.getUserById(uId);
 
+        if (!user.getRole().equals("ADMIN")) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
         // Call the userService.getAllUsers() method that returns a list of users and save it in the allUsers list
         List<UserDTO> allUsers = userService.getAllUsers();
         return ResponseEntity.ok(allUsers);
@@ -69,6 +73,9 @@ public class UserController {
     public ResponseEntity<UserDTO> getUserById(@PathVariable int uId){
         try {
             UserDTO user = userService.getUserById(uId);
+            if (!user.getRole().equals("ADMIN")) {
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
             return ResponseEntity.ok(user);
         } catch (UserNotFoundException e) {
             throw e;
