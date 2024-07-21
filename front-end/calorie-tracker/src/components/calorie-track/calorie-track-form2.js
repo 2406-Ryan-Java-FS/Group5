@@ -20,7 +20,8 @@ export default function CalorieTrackForm2({foodList}){
         food: {
             foodName: "",
             calorie: "",
-            fid: 0
+            fid: 0,
+            uid: 1
         },
         uid: user.uid,
         cid: 0
@@ -121,7 +122,9 @@ export default function CalorieTrackForm2({foodList}){
                 toast.success("Update success! :)")
                 navigate('/calorietrack')
             }else if(res.status === 400){
-                return res.json()
+                const body = res.json();
+                console.log(body);
+                return body;
             }
         })
         .then(errors => {
@@ -143,6 +146,11 @@ export default function CalorieTrackForm2({foodList}){
             <div>
                 <input type="number" name="uid" id="uid" 
                 value={calorieTrack.uid} 
+                onChange={handleChange} hidden/>
+            </div>
+            <div>
+                <input type="number" name="foodUid" id="foodUid" 
+                value={calorieTrack.food.uid} 
                 onChange={handleChange} hidden/>
             </div>
             <div className="mb-2">

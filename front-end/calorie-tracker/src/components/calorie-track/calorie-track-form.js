@@ -13,8 +13,7 @@ export default function CalorieTrackForm(){
     //Populate food search results
     function handleSearch(event){
         event.preventDefault();
-        console.log(`http://localhost:8080/api/food/search?foodName=${searchInput}`)
-        fetch(`http://localhost:8080/api/food/search?foodName=${searchInput}`)
+        fetch(`http://localhost:8080/api/users/${user.uid}/food/search?foodName=${searchInput}`)
             .then(res =>{
                 const body = res.json();
                 console.log("body: " + body )

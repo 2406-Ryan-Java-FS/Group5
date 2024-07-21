@@ -13,7 +13,7 @@ export default function CalorieTrackCard({date}){
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/calorietrack/user/${user.uid}/date?logDate=${formattedDate}`)
+        fetch(`http://localhost:8080/api/calorietrack/users/${user.uid}/date?logDate=${formattedDate}`)
         .then(res => {
             const body = res.json();
             // console.log(body);

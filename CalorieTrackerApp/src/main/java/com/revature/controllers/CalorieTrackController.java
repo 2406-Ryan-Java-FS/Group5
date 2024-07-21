@@ -73,12 +73,12 @@ public class CalorieTrackController {
         System.out.println("CalorieTrackDTO: " + calorieTrackDTO);
         System.out.println(calorieTrackDTO.toString());
         System.out.println("userId: " + calorieTrackDTO.getUId());
-        System.out.println("foodId: " +calorieTrackDTO.getFId());
+        System.out.println("foodId: " +calorieTrackDTO.getFood().getFId());
         Result<CalorieTrackDTO> result = calorieTrackService.createCalorieTrack(calorieTrackDTO);
         System.out.println(result);
         //If creation went successful, it will return payload of result which has a CalorieTrackDTO object.
         if(result.isSuccess()){
-            System.out.println("post succedd");
+            System.out.println("post succeed");
             return new ResponseEntity<>(result.getPayload(),HttpStatus.CREATED);
         }
         //Else return BAD_REQUEST

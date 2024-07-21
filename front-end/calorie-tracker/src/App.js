@@ -13,6 +13,7 @@ import Error from "./components/Error";
 import CalorieTrackDelete from "./components/calorie-track/calorie-track-delete";
 import BmiCalculator from "./components/bmi-calculator";
 import { useLocation } from "react-router-dom";
+import AdminUserManageView from "./components/admin-user-management/admin-user-manage-view";
 
 function App() {
 
@@ -49,6 +50,9 @@ function App() {
 
     <Route path="*" element={<Error />} />
     <Route path="bmi-calculator" element={<BmiCalculator />} />
+
+
+    <Route path="/admin/user-management" element={<AdminUserManageView/>} />
 
   </Routes>
 

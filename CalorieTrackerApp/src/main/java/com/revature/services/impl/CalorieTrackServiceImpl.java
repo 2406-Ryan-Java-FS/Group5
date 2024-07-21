@@ -1,9 +1,9 @@
 package com.revature.services.impl;
 
 import com.revature.dto.CalorieTrackDTO;
+import com.revature.dto.FoodDTO;
 import com.revature.exceptions.CalorieTrackExceptions.CalorieTrackNotFoundException;
 import com.revature.exceptions.FoodExceptions.FoodNotFoundException;
-import com.revature.exceptions.userexceptions.UserNotFoundException;
 import com.revature.models.CalorieTrack;
 import com.revature.models.Food;
 import com.revature.models.User;
@@ -12,7 +12,6 @@ import com.revature.repositories.FoodRepo;
 import com.revature.repositories.UserRepo;
 import com.revature.services.CalorieTrackService;
 import com.revature.services.Result;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -77,14 +76,11 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
         return calorieTrackDTOS;
     }
 
-    public CalorieTrackServiceImpl() {
-        super();
-    }
 
-        @Override
+    @Override
     public Result<CalorieTrackDTO> createCalorieTrack(CalorieTrackDTO calorieTrackDTO) {
         System.out.println("in service layer");
-       Result<CalorieTrackDTO> result = validateCalorieTrack(calorieTrackDTO);
+        Result<CalorieTrackDTO> result = validateCalorieTrack(calorieTrackDTO);
         if(!result.isSuccess()){
             return result;
         }
@@ -96,10 +92,7 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
         CalorieTrackDTO returnedCalorieTrackDTO = convertCalorieTrackToCalorieTrackDTO(calorieTrack);
         result.setPayload(returnedCalorieTrackDTO);
         return result;
-
-
     }
-
 
     @Override
     public Result<CalorieTrackDTO> updateCalorieTrack(CalorieTrackDTO calorieTrackDTO) {
@@ -162,7 +155,7 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
             // throw userNotFoundException("UserId is required")
             result.addErrorMessage("UserId is required");
         }
-        if(calorieTrackDTO.getFId() == 0){
+        if(calorieTrackDTO.getFood().getFId() == 0){
             //throw foodNotFound("Food cannot be null")
             result.addErrorMessage("Food cannot be null");
         }
@@ -175,20 +168,14 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
     private CalorieTrack convertCalorieTrackDTOTOCalorieTrack(CalorieTrackDTO calorieTrackDTO){
         // change exception.
         User user = userRepository.findById(calorieTrackDTO.getUId()).orElseThrow(() -> new CalorieTrackNotFoundException("user is not found"));
-        Food food = foodRepository.findById(calorieTrackDTO.getFId()).orElseThrow(() -> new FoodNotFoundException("food cannot be found"));
+        Food food = foodRepository.findById(calorieTrackDTO.getFood().getFId()).orElseThrow(() -> new FoodNotFoundException("food cannot be found"));
         CalorieTrack calorieTrack = new CalorieTrack();
-        //calorieTrack.setCId(calorieTrackDTO.getCId()); // Assuming setCId method exists
+        calorieTrack.setCId(calorieTrackDTO.getCId()); // Assuming setCId method exists
         calorieTrack.setServing(calorieTrackDTO.getServing());
         calorieTrack.setLogDate(calorieTrackDTO.getLogDate());
         calorieTrack.setUser(user);
         calorieTrack.setFood(food);
         return calorieTrack;
-//        return CalorieTrack.builder()
-//                .serving(calorieTrackDTO.getServing())
-//                .logDate(calorieTrackDTO.getLogDate())
-//                .user(user)
-//                .food(food)
-//                .build();
     }
 
     private CalorieTrackDTO convertCalorieTrackToCalorieTrackDTO(CalorieTrack calorieTrack){
@@ -196,15 +183,17 @@ public class CalorieTrackServiceImpl implements CalorieTrackService {
                 calorieTrack.getCId(),
                 calorieTrack.getServing(),
                 calorieTrack.getLogDate(),
-                calorieTrack.getUser().getUId(),
-                calorieTrack.getFood().getFId()
+                convertFoodToFoodDTO(calorieTrack.getFood()),
+                calorieTrack.getUser().getUId()
         );
-//        return CalorieTrackDTO.builder()
-//                .cId(calorieTrack.getCId())
-//                .serving(calorieTrack.getServing())
-//                .logDate(calorieTrack.getLogDate())
-//                .uId(calorieTrack.getUser().getUId())
-//                .fId(calorieTrack.getFood().getFId())
-//                .build();
+    }
+
+    private FoodDTO convertFoodToFoodDTO(Food food){
+        return FoodDTO.builder()
+                .fId(food.getFId())
+                .foodName(food.getFoodName())
+                .calorie(food.getCalorie())
+                .uId(food.getUser().getUId())
+                .build();
     }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import BMIChart from './BMIChart.js';
@@ -7,12 +7,17 @@ export default function BmiCalculator() {
 
     const { user } = useAuth();
 
+    let userBMI = 0;
+
+    useEffect(() => {
+       
+    },[user])
+
     if (!user) {
         return <p>Please log in to view this page.</p>;
     }
     
-    let userBMI = 0;
- 
+
     const calculateBMI = () => {
         const heightInMeters = user.height / 100;
         const bmi = user.weight / (heightInMeters * heightInMeters);
@@ -30,12 +35,13 @@ export default function BmiCalculator() {
             // return bmi.toFixed(2);
             return `${bmi.toFixed(2)} (${definition})`; // Round to 2 decimal places
     };
+   
 
   
     return (
         <div className="bmi-calculator">
             <h2>BMI Calculator</h2>
-            <p><strong>BMI:</strong> {calculateBMI()}</p>
+            <p><strong>BMI:</strong> calculateBMI()</p>
             <BMIChart userBMI = {userBMI} />
             <div className='d-flex justify-content-end'>
              <Link to="/profile/form"><button>Update Profile</button></Link>
