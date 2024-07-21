@@ -1,0 +1,24 @@
+FLOW OF THE PRESENTATION
+
+log in as admin.
+8. demo admin food crud. 
+7. Show the table for logged in user profiles.
+9. log out and log in as user to show the admin's food item.
+
+
+1. User registration and login.
+2. user profile creation
+3. user profile update.
+4. user bmi calculation:
+- edit profile to show the change of BMI calculations
+5. calorietracker dashboard:
+ - show that user can monitor their caloriegoals weekly and daily.
+ - adding calorie log for 2 -3 food items for that day.
+ - add calorie log for previous week (2 days).
+ - show that the added calorie log is in the previous week. 
+ - update existing calorie log.
+ - delete existing calorie log. 
+
+10. User logs out.
+
+
