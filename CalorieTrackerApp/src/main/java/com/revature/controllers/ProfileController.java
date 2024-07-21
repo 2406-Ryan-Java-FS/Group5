@@ -89,11 +89,11 @@ public class ProfileController {
     @GetMapping
     public ResponseEntity<ProfileDTO> getProfileByUserId(@PathVariable Integer uId){
 
-        UserDTO userDTO = userService.getUserById(uId);
-
-        if (!userDTO.getRole().equals("ADMIN")) {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
+//        UserDTO userDTO = userService.getUserById(uId);
+//
+//        if (!userDTO.getRole().equals("ADMIN")) {
+//            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+//        }
 
         ProfileDTO profileDTO = profileService.getProfileByUserId(uId);
 
