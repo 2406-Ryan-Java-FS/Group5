@@ -6,8 +6,10 @@ import { Route} from "react-router-dom";
 import { Routes } from "react-router-dom";
 import CalorieTrackView from "./components/calorie-track/calorie-track-view";
 import CalorieTrackForm from "./components/calorie-track/calorie-track-form";
+import AdminFoodPage from "./components/admin-food-page";
 import ProfileView from "./components/profile-view";
 import ProfileForm from "./components/profile-form";
+import MainComponent from "./components/main-component";
 import { AuthProvider } from "./AuthContext";
 import Error from "./components/Error";
 import CalorieTrackDelete from "./components/calorie-track/calorie-track-delete";
@@ -37,7 +39,12 @@ function App() {
         <Route path="profile" element={<ProfileView />} />
 
         <Route path="profile/form" element={<ProfileForm />} />
+
+        <Route path="/admin" element={<AdminFoodPage />} />
+
         <Route path="profile/form/edit/:pId" element={<ProfileForm />}/>
+
+        <Route path="/" element={<MainComponent />} />
 
     {/* Calorie-track-dashboard */}
     <Route path="/calorietrack" element={<CalorieTrackView/>}/>
@@ -59,3 +66,4 @@ function App() {
 }
 
 export default App;
+
