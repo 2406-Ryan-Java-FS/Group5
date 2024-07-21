@@ -1,0 +1,30 @@
+.bmi-chart {
+    width: 100%;
+    position: relative;
+    margin: 20px 0;
+  }
+  
+  .bmi-scale {
+    position: relative;
+    height: 30px;
+    background: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .bmi-indicator {
+    position: absolute;
+    top: 10px; /* Adjusts vertical alignment of the indicator */
+    height: 30px;
+    width: 2px;
+    background: red;
+    text-align: center;
+    color: black;
+  }
+  
+  .bmi-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+  }
+  

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
+import BMIChart from './BMIChart.js';
 
 export default function BmiCalculator() {
 
@@ -9,18 +10,37 @@ export default function BmiCalculator() {
     if (!user) {
         return <p>Please log in to view this page.</p>;
     }
-
+    
+    let userBMI = 0;
+ 
     const calculateBMI = () => {
         const heightInMeters = user.height / 100;
         const bmi = user.weight / (heightInMeters * heightInMeters);
-        return bmi.toFixed(2); // Round to 2 decimal places
+        userBMI = bmi.toFixed(2);
+        let definition;
+        if(bmi < 18.5){
+            definition = "Underweight";
+        }else if(bmi>=18.5 && bmi<25.0){
+            definition = "Healthy";
+        }else if(bmi>=25.0 && bmi < 30.0){
+            definition = "Overweight";
+        }else{
+            definition = "Obese";
+        }
+            // return bmi.toFixed(2);
+            return `${bmi.toFixed(2)} (${definition})`; // Round to 2 decimal places
     };
 
+  
     return (
         <div className="bmi-calculator">
             <h2>BMI Calculator</h2>
             <p><strong>BMI:</strong> {calculateBMI()}</p>
-            <Link to="/profile/form"><button>Update Profile</button></Link>
+            <BMIChart userBMI = {userBMI} />
+            <div className='d-flex justify-content-end'>
+             <Link to="/profile/form"><button>Update Profile</button></Link>
+            </div>
+           
         </div>
     );
 }

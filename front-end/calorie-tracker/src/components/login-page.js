@@ -26,8 +26,8 @@ export default function LoginPage() {
             if (response.ok) {
                 const userData = await response.json();
                 console.log('Login successful', userData);
-                login(userData);
                 toast.success("Login Successful! :)")
+                login(userData);
                 navigate('/profile')
                
             } else {

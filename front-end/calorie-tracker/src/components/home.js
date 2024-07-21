@@ -7,6 +7,9 @@ export default function Home(){
 
 
     return (<>
+        <div className="logo d-flex justify-content-center mb-4">
+        <img src='/Red.png' alt='Calorie Track Pro Logo' width='100' />
+        </div>
         <h1 >
            Calorie Tracker Pro
         </h1>

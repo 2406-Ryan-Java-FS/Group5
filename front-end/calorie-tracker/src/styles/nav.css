@@ -1,0 +1,57 @@
+.navbar{
+    box-sizing: border-box;
+}
+.navbar ul li{
+    padding-left: 10px;
+}
+
+#navLoginBtn, #logoutBtn{
+    background-color: #28a745;
+    color: white;
+    font-family: 'Noto Sans';
+    font-weight: 500;
+    border: none;
+
+}
+
+#logoutBtn{
+    margin-left: 10px;
+}
+
+#navSignUpBtn{
+    border: 1px solid #28a745;
+    color: #28a745;
+    background-color: white;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+
+}
+
+#navLoginBtn:hover, #logoutBtn:hover{
+    background-color: #365c4c;
+    color: white;
+}
+
+#navSignUpBtn:hover{
+    background-color: #45776227;
+    color:  #457762;
+}
+
+.usernameBadge{
+    font-family: 'Noto Sans', sans-serif;
+    color: #104c4e;
+    margin-left: 20px;
+}
+
+.usernameBadge span{
+    font-weight: bold;
+}
+
+.nav-item .nav-link{
+    font-weight: 600;
+}
+
+.nav-link:hover {
+    color: #457762;;
+}
+

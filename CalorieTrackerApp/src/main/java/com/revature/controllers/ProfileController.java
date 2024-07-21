@@ -73,6 +73,7 @@ public class ProfileController {
 
         ProfileDTO updatedProfile = profileService.updateProfile(uId, pId, profileDTO);
         return ResponseEntity.ok(updatedProfile);
+
     }
 
     @DeleteMapping("/{pId}")

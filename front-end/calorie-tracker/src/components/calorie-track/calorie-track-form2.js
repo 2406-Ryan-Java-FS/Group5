@@ -2,6 +2,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import {useEffect, useState} from "react";
 import ValidationSummary from "../ValidationSummary";
 import {useAuth} from "../../AuthContext"
+import toast, {Toaster} from 'react-hot-toast';
 
 export default function CalorieTrackForm2({foodList}){
     const {user} = useAuth();
@@ -83,6 +84,7 @@ export default function CalorieTrackForm2({foodList}){
         .then(res => {
             if(res.ok){
                 console.log("res.ok")
+                toast.success("Added a log Successfully! :)");
                 navigate("/calorietrack");
             }else{
                 return res.json();
@@ -91,6 +93,7 @@ export default function CalorieTrackForm2({foodList}){
         .then(err => {
             if(err){
                 console.log("error!")
+                toast.error("Adding a log failed :(");
                 return Promise.reject(err);
             }
         })
@@ -115,12 +118,14 @@ export default function CalorieTrackForm2({foodList}){
         fetch("http://localhost:8080/api/calorietrack/" + calorieTrack.cid, config)
         .then(res => {
             if(res.ok){
+                toast.success("Update success! :)")
                 navigate('/calorietrack')
             }else if(res.status === 400){
                 return res.json()
             }
         })
         .then(errors => {
+            toast.error("Failed to update :(")
             setErrors(errors);
         })
         .catch(error => {
@@ -130,18 +135,18 @@ export default function CalorieTrackForm2({foodList}){
     }
 
 
-    return (<div>
-        <h3>Log your calorie</h3>
+    return (<div className="mt-4">
+        <h3 className="mb-4">Log your calories</h3>
+        <Toaster position="top-center" />
         <ValidationSummary errors={errors}/>
         <form onSubmit={handleSubmit}>
             <div>
-                uId
                 <input type="number" name="uid" id="uid" 
                 value={calorieTrack.uid} 
                 onChange={handleChange} hidden/>
             </div>
-            <div>
-                <label htmlFor="food">Food</label>
+            <div className="mb-2">
+                <label className htmlFor="food">Food:
                 <select
                 id="food"
                 required
@@ -154,11 +159,12 @@ export default function CalorieTrackForm2({foodList}){
                     <option key={food.fid} value={food.fid}>{food.foodName} - {food.calorie}cal</option>
                 ))}
                 </select>
-                {cId?<div>{calorieTrack.food.foodName}-{calorieTrack.food.calorie}cal</div>:<></>}
+                {cId?<div className="originalFood mt-3"><b>{calorieTrack.food.foodName}-{calorieTrack.food.calorie}cal</b></div>:<></>}
+                </label>
             </div>
             
-            <div>
-                <label htmlFor="serving">Servings : </label>
+            <div className="mb-2">
+                <label className="form-label" htmlFor="serving">Servings :
                 <input type="number" 
                         min="0"
                         name="serving"
@@ -167,17 +173,19 @@ export default function CalorieTrackForm2({foodList}){
                         value={calorieTrack.serving}
                         step="any"
                         onChange={handleChange}/>
+                         </label>
             </div>
             <div>
-                <label htmlFor="logDate">date : </label>
+                <label htmlFor="logDate">date : 
                 <input type="date"
                         name="logDate"
                         id="logDate"
                         value={calorieTrack.logDate}
                         placeholder={formattedDate}
                         onChange={handleChange}/>
+                </label>
             </div>
-                <div className="d-flex justify-content-end pb-3">
+                <div className="trackForm d-flex justify-content-end pb-3">
                     <button id="addTrack"
                     calssName='btn btn-success me-2'
                     type='submit'>Submit</button>

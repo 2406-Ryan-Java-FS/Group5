@@ -28,11 +28,12 @@ export default function CalorieTrackCard({date}){
         <>
             <td>
                 {ctListforADay && ctListforADay.map((ct, index) => (
-                    <div className="d-flex" key={index}>
+                    <div className="d-flex justify-content-between" key={index}>
                         
-                        <div>
+                        <div className="log-detail">
                             <div> <b>{ct.food.foodName}</b></div>
-                            <div>{ct.serving} servs {ct.food.calorie} cal</div>
+                            <div>{ct.serving} servs</div> 
+                            <div>{ct.food.calorie} cal</div>
                             
                         </div>
                         <div className="d-flex">

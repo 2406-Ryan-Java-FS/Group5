@@ -1,8 +1,12 @@
+import {Link} from 'react-router-dom';
 import { useState } from "react";
+import {useAuth} from "../../AuthContext"
 import CalorieTrackForm2 from "./calorie-track-form2";
+import '../../styles/calorie-track-form.css';
 
 export default function CalorieTrackForm(){
 
+    const {user} = useAuth();
     const[foodList, setFoodList] = useState([]);
     const [searchInput, setSearchInput] = useState("");
     
@@ -33,19 +37,31 @@ export default function CalorieTrackForm(){
         
     }
 
+    if(!user){
+        return(<div>
+            <Link type="login" to="/login">Log in and start to log your calories!</Link>
+        </div>)
+    }
+
+
     return(
-        <div className="container calorie-track-form">
-            <h3 className="mt-2">Search Your Food</h3>
+        <div className=" calorie-track-form">
+            <div className="foodSearchBox">
+            <h3 className="mt-3 mb-3">Search Your Food</h3>
             {/* form for searching food */}
             <form className="doSerachFood" onSubmit={handleSearch}>
-                <div className="col mb-2">
-                    <input type="text" className="form-control" onChange={handleChange} value={searchInput}id="searchBox"/>
+                <div className=" mb-2">
+                    <div className="d-flex justify-content-start">
+                    <input type="text" className="form-control" onChange={handleChange} value={searchInput} id="searchBox"/>
+                    </div>
                 </div>
-                <div className="col d-flex justify-content-end">
-                    <button className="btn btn-outline btn-primary" type = 'submit'>Search</button>
+                <div className="d-flex justify-content-end">
+                    <button className="btn btn-outline-success" type = 'submit'>Search</button>
                 </div>
             </form>
-
+            </div>
+            <hr/>
+            
             <CalorieTrackForm2 foodList={foodList}/>
 
         </div>

@@ -1,0 +1,38 @@
+.calorie-track-form h3{
+    font-weight: 600;
+}
+.trackForm .btn{
+    width: 100px;
+    height: 45px;
+    margin-top: 10px;
+}
+
+hr{
+    border: 2px solid #365c4c76;
+}
+
+.originalFood{
+    color: #365c4c;
+}
+
+.bi-arrow-up-circle-fill{
+    color:#28a745
+}
+
+.bi-x-circle-fill{
+    color: #D03737;
+}
+
+.weekBtn{
+    border: 1px solid #28a745;
+    color: #28a745;
+    background-color: #f0f0f0;
+    font-weight: 500;
+}
+
+.log-detail{
+    text-align: left;
+}
+/* .weekBtn:hover{
+    background-color: #114b1e5e;
+} */
