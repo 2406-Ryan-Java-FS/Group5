@@ -6,7 +6,7 @@ import { Route} from "react-router-dom";
 import { Routes } from "react-router-dom";
 import CalorieTrackView from "./components/calorie-track/calorie-track-view";
 import CalorieTrackForm from "./components/calorie-track/calorie-track-form";
-import AdminFoodPage from "./components/admin-food-page";
+import AdminFoodPage from "./components/admin-food-management/admin-food-page";
 import ProfileView from "./components/profile-view";
 import ProfileForm from "./components/profile-form";
 import MainComponent from "./components/main-component";
@@ -16,10 +16,12 @@ import CalorieTrackDelete from "./components/calorie-track/calorie-track-delete"
 import BmiCalculator from "./components/bmi-calculator";
 import { useLocation } from "react-router-dom";
 import AdminUserManageView from "./components/admin-user-management/admin-user-manage-view";
+import AdminFoodManageTable from "./components/admin-food-manage-table";
 
 function App() {
 
-  const location = useLocation();
+  
+const location = useLocation();
 
   const showNavBar = () =>{
     const noNavbarPaths = ['/', '/login', '/signup', '/error'];
@@ -42,6 +44,11 @@ function App() {
         <Route path="profile/form" element={<ProfileForm />} />
 
         <Route path="/admin" element={<AdminFoodPage />} />
+
+        <Route path="/admin/manage-food" element={<AdminFoodManageTable />} />
+
+        <Route path="/admin/profiles" element={<AdminUserManageView />} />
+  
 
         <Route path="profile/form/edit/:pId" element={<ProfileForm />}/>
 
