@@ -1,6 +1,6 @@
-<img width="442" alt="image" src="https://github.com/user-attachments/assets/752ba2b9-c3dd-4070-ad3a-9c8055256461"># Calorie Tracker PRO
+# Calorie Tracker PRO
 ---
-<img src="https://github.com/oyunmintrio95/camp-project/blob/main/documents/intro_campenjoy.png"  width="800" height="400"/>
+<img src="https://github.com/2406-Ryan-Java-FS/Group5/blob/main/documents/calorie-track-pro-front.png"  width="800" height="400"/>
 
 ## Developers
 - Eugene Kirima
@@ -50,7 +50,7 @@ You need to run both camp-in-project(Backend) and campin-react-app(Frontend).
   - Admin can access and manage users.
 
 ### Tech Stacks
-<img src="https://github.com/oyunmintrio95/camp-project/blob/main/documents/intro_campenjoy.png"  width="800" height="400"/>
+<img src="documents/tech-stacks.png"  width="800" height="400"/>
 * Front End
   * React JS
   * HTML
@@ -68,7 +68,7 @@ You need to run both camp-in-project(Backend) and campin-react-app(Frontend).
   * AWS RDS
 
 ### Database Schema
-<img src="https://github.com/oyunmintrio95/camp-project/blob/main/documents/intro_campenjoy.png"  width="800" height="400"/>
+<img src="documents/database-schema.png"  width="800" height="400"/>
 
 ### Presentation Documents
 * We recommend reading the pdf file.
