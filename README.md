@@ -51,18 +51,21 @@ You need to run both camp-in-project(Backend) and campin-react-app(Frontend).
 
 ### Tech Stacks
 <img src="documents/tech-stacks.png"  width="800" height="400"/>
+
 * Front End
   * React JS
   * HTML
   * CSS
   * React BootStrap
   * JavaScript
+    
 * Backend
   * Java
   * Spring Web Framework
   * Spring boot project
   * Spring Modules: Spring MVC, Spring REST, Spring Data JPA
   * Maven
+    
 * DB
   * PostgreSQL
   * AWS RDS
