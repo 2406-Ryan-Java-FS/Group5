@@ -7,7 +7,7 @@
 - Hayoung Cheon
 - Uriel Cohavy
 
-  ## Installation Guide
+## Installation Guide
 You need to run both camp-in-project(Backend) and campin-react-app(Frontend).
 * Run SQL in your MySQL workbench.
   
@@ -23,11 +23,24 @@ You need to run both camp-in-project(Backend) and campin-react-app(Frontend).
 *  To run campin-react-app
  * In your terminal, `cd` to front-end/calorie-tracker
  * `npm install` to install all the dependencies
- * `npm start` or `npm run start` 
+ * `npm start` or `npm run start`
 
+## Table of Contents
+> 1. [ About the project ](#about-project)
+> 2. [ Key Features ](#key-features)
+> 3. [ User Stories ](#user-stories)
+> 4. [ Task Stacks ](#tack-stacks)
+> 5. [ Database Schema ](#database-schema)
+> 6. [ Presentation Documents ](#presentation-documents)
+> 7. [ Demonstration ](#demonstration)
+
+---
+
+<a name="about-project"></a>
 ### About the Project
   - An app to track your calorie intake to meet your specific calorie count goal. It helps users track their calorie intake to meet their calorie count goals and maintain their health.
 
+<a name="key-features"></a>
 ### Key Features
   - User authentication and profile management.
   - BMI calculation.
@@ -35,6 +48,7 @@ You need to run both camp-in-project(Backend) and campin-react-app(Frontend).
   - Daily and weekly calorie count monitoring
   - Admin Functionality for food database management.
 
+<a name="user-stories"></a>
 ### User Stories
   - Users can register and create user accounts.
   - User can log in and log out from their account.
@@ -49,6 +63,7 @@ You need to run both camp-in-project(Backend) and campin-react-app(Frontend).
   - The admin can add, update, and delete foods from the food data.
   - Admin can access and manage users.
 
+<a name="tech-stacks"></a>
 ### Tech Stacks
 <img src="documents/tech-stacks.png"  width="800" height="400"/>
 
@@ -70,12 +85,19 @@ You need to run both camp-in-project(Backend) and campin-react-app(Frontend).
   * PostgreSQL
   * AWS RDS
 
+<a name="database-schema"></a>
 ### Database Schema
 <img src="documents/database-schema.png"  width="800" height="400"/>
 
+<a name="presentation-documents"></a>
 ### Presentation Documents
 * We recommend reading the pdf file.
+   <br>
+⌞ [Calorie Tracker PRO Presentation.pdf](documents/Calorie Tracker PRO Presentation.pdf "Presentation pdf file")
+<br>
+⌞ [Calorie Tracker PRO Presentation.pptx](documents/Calorie Tracker PRO Presentation.pptx "Presentation ppt file")
 
+<a name="demonstration"></a>
 ### Demonstration
 * Landing Page
 <img src="documents/demo-gif/landing-page.gif"  width="800" height="400"/>
