@@ -1,0 +1,20 @@
+/* Ensure the table container can scroll */
+.admin-user-manage-table {
+    max-height: 80vh; /* Adjust based on your layout */
+    overflow-y: auto; /* Allows vertical scrolling */
+    overflow-x: auto; /* Allows horizontal scrolling */
+    border: 1px solid #ddd; /* Optional: Adds a border around the container */
+    padding: 10px; /* Optional: Adds padding inside the container */
+}
+
+/* Optional: Style the table */
+.admin-user-manage-table table {
+    width: 100%; /* Ensures table takes full width of the container */
+    border-collapse: collapse; /* Makes the table borders look neat */
+}
+
+.admin-user-manage-table th, .admin-food-manage-table td {
+    border: 1px solid #ddd; /* Adds border to table cells */
+    padding: 8px; /* Adds padding inside table cells */
+    text-align: left; /* Aligns text to the left */
+}

@@ -41,6 +41,9 @@ export default function BmiCalculator() {
     return (
         <div className="bmi-calculator">
             <h2>BMI Calculator</h2>
+            <p className="bmi-formula text-center">
+            BMI = weight (kg) / (height (m) * height (m))
+            </p>
             <p><strong>BMI:</strong> {calculateBMI()}</p>
             <BMIChart userBMI = {userBMI} />
             <div className='d-flex justify-content-end'>

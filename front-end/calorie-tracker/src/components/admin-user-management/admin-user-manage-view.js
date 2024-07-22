@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom";
 import { useAuth } from "../../AuthContext"
 import AmdinUserManageTable from "./admin-user-manage-table";
+import '../../styles/adminuser.css';
 
 export default function AdminUserManageView(){
     const {user} = useAuth();
@@ -25,7 +26,7 @@ export default function AdminUserManageView(){
     return(<>
 
         <h2> User Management</h2>
-        <table className="table">
+        <table className="admin-user-manage-table">
             <thead>
                 <tr>
                     <th>Index</th>
