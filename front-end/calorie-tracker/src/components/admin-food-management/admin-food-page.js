@@ -9,7 +9,7 @@ const AdminFoodPage = () => {
 
     const handleAddFood = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:8080/api/users/37/food`, {
+        fetch(`http://localhost:8080/api/users/${user.uid}/food`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newFood),

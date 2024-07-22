@@ -10,7 +10,7 @@ export default function AdminUserManageView(){
 
     //fetch all the user's lists
     useEffect(() => {
-        fetch(`http://localhost:8080/api/users/1/all`) //This will be an issue for my routing because the id for me is 37...
+        fetch(`http://localhost:8080/api/users/${user.uid}/all`) //This will be an issue for my routing because the id for me is 37...
         .then(res => res.json())
         .then(body => {
             console.log("userList: ", body);
@@ -31,7 +31,6 @@ export default function AdminUserManageView(){
                     <th>Index</th>
                     <th>Username</th>
                     <th>Calorie Goal</th>
-                    <th>Detail</th>
                 </tr>
             </thead>
             <tbody> 

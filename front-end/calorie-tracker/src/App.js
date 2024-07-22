@@ -16,7 +16,7 @@ import CalorieTrackDelete from "./components/calorie-track/calorie-track-delete"
 import BmiCalculator from "./components/bmi-calculator";
 import { useLocation } from "react-router-dom";
 import AdminUserManageView from "./components/admin-user-management/admin-user-manage-view";
-import AdminFoodManageTable from "./components/admin-food-manage-table";
+import AdminFoodManageTable from "./components/admin-food-management/admin-food-manage-table";
 
 function App() {
 
@@ -66,7 +66,7 @@ const location = useLocation();
     <Route path="bmi-calculator" element={<BmiCalculator />} />
 
 
-    <Route path="/admin/user-management" element={<AdminUserManageView/>} />
+    <Route path="/admin/users" element={<AdminUserManageView/>} />
 
   </Routes>
 

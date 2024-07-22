@@ -68,7 +68,7 @@ export default function CalorieTrackDelete(){
           {success && (
           <div className='alert alert-success' role='alert'>
             <p>
-              Successfully deleted review! Navigating back to
+              Successfully deleted the log! Navigating back to
               your calorie track page ...{' '}
             </p>
           </div>
@@ -76,7 +76,7 @@ export default function CalorieTrackDelete(){
         <h2 className="pt-2">Delete Calorie Log</h2>
         <div className="mb-2">
                   <div className="confirmMsg">
-                      Are you sure you want to delete the following Log?
+                      <b>Are you sure you want to delete the following Log?</b>
                   </div>
           <ul>
             <li>
@@ -91,7 +91,6 @@ export default function CalorieTrackDelete(){
                   <button onClick={handleDelete} className='btn btn-success' id="deleteConfirmBtn">
                  Delete
                   </button>
-                  {/* should navigate to campiste detail maybe.. */}
                   <Link className='btn btn-success ms-2' to={`/calorietrack`} id="deleteCancelBtn"> Cancel</Link>
               </div>
                   

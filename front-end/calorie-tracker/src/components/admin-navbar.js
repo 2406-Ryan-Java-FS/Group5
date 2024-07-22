@@ -17,7 +17,7 @@ const AdminNavbar = () => {
         <>
             <nav id='navbar'>
                 <Link to="/admin">Manage Foods</Link>
-                <Link to="/admin/profiles">Manage Profiles</Link>
+                <Link to="/admin/users">Manage Profiles</Link>
                 <Link to="/" onClick={handleLogout}>Log Out</Link>
             </nav>
         </>
