@@ -78,45 +78,57 @@ You need to run both camp-in-project(Backend) and campin-react-app(Frontend).
 
 ### Demonstration
 * Landing Page
-  <img src="documents/demo-gif/landing-page.gif"  width="800" height="400"/>
-  <br>
+<img src="documents/demo-gif/landing-page.gif"  width="800" height="400"/>
+<br>
+  
 * Signup
-  <img src="documents/demo-gif/signup.gif"  width="800" height="400"/>
-  <br>
+<img src="documents/demo-gif/signup.gif"  width="800" height="400"/>
+<br>
+  
 * Login
-  <img src="documents/demo-gif/login.gif"  width="800" height="400"/>
-  <br>
+<img src="documents/demo-gif/login.gif"  width="800" height="400"/>
+<br>
+  
 * User Profile registration/update
 <img src="documents/demo-gif/profile.gif"  width="800" height="400"/>
-  <br>
+<br>
+
 * User BMI Calculation
-  <img src="documents/demo-gif/bmi-calculation.gif"  width="800" height="400"/>
-  <br>
+<img src="documents/demo-gif/bmi-calculation.gif"  width="800" height="400"/>
+<br>
+
 * User Calorie track registration
-   <img src="documents/demo-gif/calorie-track-view1.gif"  width="800" height="400"/>
-   <img src="documents/demo-gif/calorie-track-view2.gif"  width="800" height="400"/>
-  <br>
+<img src="documents/demo-gif/calorie-track-view1.gif"  width="800" height="400"/>
+<img src="documents/demo-gif/calorie-track-view2.gif"  width="800" height="400"/>
+<br>
+
 * User Calorie track update
-  <img src="documents/demo-gif/calorie-track-update.gif"  width="800" height="400"/>
-  <br>
+<img src="documents/demo-gif/calorie-track-update.gif"  width="800" height="400"/>
+<br>
+
 * User Calorie track deletion
-  <img src="documents/demo-gif/calorie-track-delete.gif"  width="800" height="400"/>
-  <br>
+<img src="documents/demo-gif/calorie-track-delete.gif"  width="800" height="400"/>
+<br>
+
 * User Logout
-  <img src="documents/demo-gif/logout.gif"  width="800" height="400"/>
-  <br>
+<img src="documents/demo-gif/logout.gif"  width="800" height="400"/>
+<br>
+
 * Admin Landing Page
-   <img src="documents/demo-gif/admin-login.gif"  width="800" height="400"/>
-  <br>
+<img src="documents/demo-gif/admin-login.gif"  width="800" height="400"/>
+<br>
+
 * Admin food add/view
-  <img src="documents/demo-gif/admin-food-add.gif"  width="800" height="400"/>
-  <br>
+<img src="documents/demo-gif/admin-food-add.gif"  width="800" height="400"/>
+<br>
+
 * Admin food update/delete
-  <img src="documents/demo-gif/admin-food-update.gif"  width="800" height="400"/>
-  <br>
+<img src="documents/demo-gif/admin-food-update.gif"  width="800" height="400"/>
+<br>
+
 * Admin user management.
-  <img src="documents/demo-gif/admin-food-user.gif"  width="800" height="400"/>
-  <br>
+<img src="documents/demo-gif/admin-food-user.gif"  width="800" height="400"/>
+<br>
 
 
 
