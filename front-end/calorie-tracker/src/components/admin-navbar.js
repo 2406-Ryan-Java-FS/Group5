@@ -15,11 +15,11 @@ const AdminNavbar = () => {
 
     return (
         <>
-        
+            <nav id='navbar'>
                 <Link to="/admin">Manage Foods</Link>
-                <Link to="/profile">Manage Profiles</Link>
+                <Link to="/admin/profiles">Manage Profiles</Link>
                 <Link to="/" onClick={handleLogout}>Log Out</Link>
-    
+            </nav>
         </>
     );
 };

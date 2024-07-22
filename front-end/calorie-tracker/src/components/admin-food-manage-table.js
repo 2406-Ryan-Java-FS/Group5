@@ -1,36 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../AuthContext';
+import '../styles/adminfood.css';
 
-const AdminFoodPage = () => {
+const AdminFoodManageTable = () => {
     const { user } = useAuth();
     const [foodItems, setFoodItems] = useState([]);
-    const [newFood, setNewFood] = useState({ foodName: '', calorie: 0 });
     const [editFood, setEditFood] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/users/${user.uId}/food/all`)
+        fetch(`http://localhost:8080/api/users/37/food/all`)
             .then(response => response.json())
             .then(data => setFoodItems(data))
             .catch(error => console.error('Error fetching food items:', error));
     }, [user.uId]);
 
-    const handleAddFood = (e) => {
-        e.preventDefault();
-        fetch(`http://localhost:8080/api/users/${user.uId}/food`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newFood),
-        })
-            .then(response => response.json())
-            .then(data => {
-                setFoodItems([...foodItems, data]);
-                setNewFood({ foodName: '', calorie: 0 });
-            })
-            .catch(error => console.error('Error adding food item:', error));
-    };
-
     const handleUpdateFood = (foodId) => {
-        fetch(`http://localhost:8080/api/users/${user.uId}/food/${foodId}`, {
+        fetch(`http://localhost:8080/api/users/37/food/${foodId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(editFood),
@@ -44,7 +29,7 @@ const AdminFoodPage = () => {
     };
 
     const handleDeleteFood = (foodId) => {
-        fetch(`http://localhost:8080/api/users/${user.uId}/food/${foodId}`, {
+        fetch(`http://localhost:8080/api/users/37/food/${foodId}`, {
             method: 'DELETE',
         })
             .then(() => {
@@ -54,42 +39,29 @@ const AdminFoodPage = () => {
     };
 
     return (
-        <div className="admin-food-page">
+        <div className="admin-food-manage-table">
             <h2>Manage Foods</h2>
-
-            <form onSubmit={handleAddFood}>
-                <h3>Add New Food Item</h3>
-                <label>
-                    Food Name:
-                    <input
-                        type="text"
-                        value={newFood.foodName}
-                        onChange={(e) => setNewFood({ ...newFood, foodName: e.target.value })}
-                        required
-                    />
-                </label>
-                <label>
-                    Calorie:
-                    <input
-                        type="number"
-                        value={newFood.calorie}
-                        onChange={(e) => setNewFood({ ...newFood, calorie: parseInt(e.target.value) })}
-                        required
-                    />
-                </label>
-                <button type="submit">Add Food</button>
-            </form>
-
-            <h3>Food Items</h3>
-            <ul>
-                {foodItems.map(item => (
-                    <li key={item.fId}>
-                        {item.foodName} - {item.calorie} calories
-                        <button onClick={() => handleDeleteFood(item.fId)}>Delete</button>
-                        <button onClick={() => setEditFood(item)}>Edit</button>
-                    </li>
-                ))}
-            </ul>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Food Name</th>
+                        <th>Calories</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foodItems.map(item => (
+                        <tr key={item.fId}>
+                            <td>{item.foodName}</td>
+                            <td>{item.calorie}</td>
+                            <td>
+                                <button onClick={() => setEditFood(item)}>Edit</button>
+                                <button onClick={() => handleDeleteFood(item.fId)}>Delete</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
 
             {editFood && (
                 <div>
@@ -122,4 +94,4 @@ const AdminFoodPage = () => {
     );
 };
 
-export default AdminFoodPage;
+export default AdminFoodManageTable;
